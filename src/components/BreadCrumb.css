@@ -1,0 +1,50 @@
+#navbar {
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 10px 16px;
+    background: var(--cli-bg);
+    border-bottom: 1px solid var(--cli-border);
+}
+
+.prompt {
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+/* user */
+.prompt .user {
+    color: var(--cli-user);
+    font-weight: bold;
+}
+
+/* @ */
+.prompt .cli-separator {
+    color: var(--cli-separator);
+}
+
+/* hostname */
+.prompt .hostname {
+    color: var(--cli-host);
+    font-weight: bold;
+}
+
+/* :/path/> */
+.prompt .cwd {
+    color: var(--cli-path);
+    margin-left: 1ch;
+}
+
+/* command */
+.prompt .cmd {
+    color: var(--cli-cmd);
+}
+
+.prompt .crumb {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.prompt .crumb:hover {
+    text-decoration: underline;
+}
