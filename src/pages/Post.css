@@ -1,14 +1,11 @@
 .post {
     text-align: left;
-    padding: 24px 32px;
+    padding: 8px 32px;
 }
 
 /* VS Code editor panel appearance for project posts */
 .post {
     background: var(--color-panel-card);
-    border: 1px solid var(--color-border);
-    border-radius: 3px;
-    font-family: var(--mono);
 }
 
 .post h1,
@@ -18,13 +15,20 @@
 .post h5,
 .post h6 {
     color: var(--color-folder-blue);
-    font-family: var(--mono);
     font-weight: 600;
 }
 
 .post h1,
 .post h2 {
     border-bottom: 1px solid var(--color-border);
+}
+
+.post h1 {
+    padding-bottom: 28px;
+    margin-bottom: 24px;
+}
+
+.post h2 {
     padding-bottom: 12px;
     margin-bottom: 16px;
 }
@@ -47,6 +51,7 @@
 
 .post pre {
     overflow-x: auto;
+    white-space: pre-wrap;
 }
 
 .post pre code {
@@ -87,5 +92,4 @@
 .post hr {
     border: none;
     border-top: 1px solid var(--color-border);
-    margin: 24px 0;
 }
