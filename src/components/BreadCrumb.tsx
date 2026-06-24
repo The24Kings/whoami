@@ -60,7 +60,8 @@ const BreadCrumb: React.FC<BreadCrumbProps> = ({ path, command }) => {
                         />
                     ))}
                 </span>
-                <span className="cmd">{'> '}{displayedCommand}</span>
+                <span className="separator">{'> '}</span>
+                <span className="cmd">{displayedCommand}</span>
                 <span className="cursor">{showCursor ? "█" : ""}</span>
             </div>
         </nav>

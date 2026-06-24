@@ -9,6 +9,7 @@ import "./Layout.css"
 
 const Layout: React.FC = () => {
     const [command, setCommand] = useState("echo welcome");
+    const [showNav, setShowNav] = useState(false);
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -24,11 +25,27 @@ const Layout: React.FC = () => {
         })),
     ];
 
+    const handleNavShow = () => {
+        setShowNav(true);
+        setCommand('ls');
+    };
+
+    const handleNavHide = () => {
+        setShowNav(false);
+        setCommand('');
+    };
+
     return (
         <CommandContext.Provider value={setCommand}>
-            <nav id="top-bar">
+            <nav
+                id="top-bar"
+                onMouseEnter={handleNavShow}
+                onMouseLeave={handleNavHide}
+                onFocus={handleNavShow}
+                onBlur={handleNavHide}
+            >
                 <BreadCrumb path={cwdPath} command={command} />
-                <NextPages />
+                {showNav && <NextPages />}
             </nav>
 
             <Outlet />
