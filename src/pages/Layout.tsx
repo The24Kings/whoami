@@ -1,8 +1,15 @@
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { BreadCrumb } from "../components";
 import type { CrumbData, CrumbVariants } from "../components/Crumb";
+import NextPages from "../components/NextPages";
+import { useState } from "react";
+import { CommandContext } from "../components/CommandContext";
+
+import "./Layout.css"
 
 const Layout: React.FC = () => {
+    const [command, setCommand] = useState("");
+
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -18,10 +25,14 @@ const Layout: React.FC = () => {
     ];
 
     return (
-        <>
-            <BreadCrumb path={cwdPath} command={'this-is-a-really-long-command'} />
+        <CommandContext.Provider value={setCommand}>
+            <nav id="top-bar">
+                <BreadCrumb path={cwdPath} command={command} />
+                <NextPages />
+            </nav>
+
             <Outlet />
-        </>
+        </CommandContext.Provider>
     );
 }
 

@@ -1,34 +1,45 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import { Home, Layout, NoPage, NoPost, Post, Projects } from './pages'
-import type { PostResp } from './Types';
+import type { PostResp, SectionData } from './Types';
 
-function loadProjects(): PostResp[] {
-  // loads raw string content of every .md file in src/markdown/projects/
-  const projectsPosts = import.meta.glob<Omit<PostResp, 'slug'>>(
-    './markdown/projects/*.md',
-    { eager: true, import: 'default' }
-  );
-
-  return Object.entries(projectsPosts).map(([path, data]) => ({
-    slug: path.replace('./markdown/projects/', ''),
-    tags: [],
-    ...data,
-  }));
-}
-
-function loadGeneral(): PostResp[] {
+function loadGeneral(): SectionData {
   // loads raw string content of every .md file in src/markdown/
   const generalPosts = import.meta.glob<Omit<PostResp, 'slug'>>(
     './markdown/*.md',
     { eager: true, import: 'default' }
   );
 
-  return Object.entries(generalPosts).map(([path, data]) => ({
-    slug: path.replace('./markdown/', ''),
-    tags: [],
-    ...data,
-  }));
+  return {
+    posts: [
+      { slug: 'projects', title: 'Projects', date: '', body: '' },
+      ...Object.entries(generalPosts).map(([path, data]) => ({
+        slug: path.replace('./markdown/', ''),
+        tags: [],
+        ...data,
+      }))
+    ],
+    links: [
+      { name: 'github', url: 'https://github.com/The24Kings' }
+    ],
+  };
+}
+
+function loadProjects(): SectionData {
+  // loads raw string content of every .md file in src/markdown/projects/
+  const projectsPosts = import.meta.glob<Omit<PostResp, 'slug'>>(
+    './markdown/projects/*.md',
+    { eager: true, import: 'default' }
+  );
+
+  return {
+    posts: Object.entries(projectsPosts).map(([path, data]) => ({
+      slug: path.replace('./markdown/projects/', ''),
+      tags: [],
+      ...data,
+    })),
+    links: [],
+  };
 }
 
 const router = createBrowserRouter([

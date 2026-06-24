@@ -1,0 +1,45 @@
+#navigation {
+    font-family: var(--mono);
+    font-size: 14px;
+    padding: 0px 16px 10px 16px;
+    background: var(--cli-bg);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.pages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25em 3ch;
+}
+
+.pages .crumb {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pages .crumb:hover {
+    text-decoration: underline;
+}
+
+/* Folders: . .. and directory entries */
+.pages #folder {
+    color: var(--color-folder-blue);
+}
+
+/* Files */
+.pages #file {
+    color: var(--color-file-text);
+}
+
+/* Symlinks */
+.symlink {
+    color: var(--cli-user);
+    text-decoration: none;
+}
+
+.symlink:hover {
+    text-decoration: underline;
+}

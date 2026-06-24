@@ -1,8 +1,8 @@
 import { Link, useRouteLoaderData } from "react-router-dom";
-import type { PostResp } from "../Types";
+import type { SectionData } from "../Types";
 
 function Projects() {
-    const posts = useRouteLoaderData('projects') as PostResp[];
+    const { posts } = useRouteLoaderData('projects') as SectionData;
 
     return (
         <ul>

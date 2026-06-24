@@ -2,7 +2,7 @@ import { useParams, useRouteLoaderData } from "react-router-dom";
 import { Converter } from "showdown";
 import hljs from "highlight.js";
 
-import type { PostResp } from "../Types";
+import type { SectionData } from "../Types";
 
 import "highlight.js/styles/atom-one-dark.css";
 import './Post.css';
@@ -41,8 +41,9 @@ function applyHighlighting(html: string): string {
 }
 
 function Post() {
-    const generalPosts = useRouteLoaderData('root') as PostResp[];
-    const projectPosts = useRouteLoaderData('projects') as PostResp[] | undefined;
+    const { posts: generalPosts } = useRouteLoaderData('root') as SectionData;
+    const projectSection = useRouteLoaderData('projects') as SectionData | undefined;
+    const projectPosts = projectSection?.posts;
 
     const { slug } = useParams();
 

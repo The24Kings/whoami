@@ -5,3 +5,13 @@ export type PostResp = {
     tags?: string[];
     body: string; // markdown or HTML
 };
+
+export type ExternalLink = {
+    name: string;
+    url: string;
+};
+
+export type SectionData = {
+    posts: PostResp[];
+    links: ExternalLink[];
+};
