@@ -8,7 +8,7 @@ import { CommandContext } from "../components/CommandContext";
 import "./Layout.css"
 
 const Layout: React.FC = () => {
-    const [command, setCommand] = useState("");
+    const [command, setCommand] = useState("echo welcome");
 
     const location = useLocation();
     const navigate = useNavigate();
