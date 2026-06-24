@@ -4,66 +4,57 @@
 }
 
 /* VS Code editor panel appearance for project posts */
-.post-project {
+.post {
     background: var(--color-panel-card);
     border: 1px solid var(--color-border);
     border-radius: 3px;
     font-family: var(--mono);
 }
 
-.post-project h1,
-.post-project h2,
-.post-project h3,
-.post-project h4,
-.post-project h5,
-.post-project h6 {
+.post h1,
+.post h2,
+.post h3,
+.post h4,
+.post h5,
+.post h6 {
     color: var(--color-folder-blue);
     font-family: var(--mono);
     font-weight: 600;
 }
 
-.post-project h1,
-.post-project h2 {
+.post h1,
+.post h2 {
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 12px;
     margin-bottom: 16px;
 }
 
-.post-project a {
+.post a {
     color: var(--color-accent-blue);
 }
 
-.post-project strong {
+.post strong {
     color: var(--color-file-text);
 }
 
-.post-project em {
+.post em {
     color: var(--color-tag-text);
 }
 
-.post-project code {
-    background: var(--color-raised-surface);
-    color: var(--color-file-text);
+.post code {
     border: 1px solid var(--color-border);
-    font-family: var(--mono);
 }
 
-.post-project pre {
-    background: var(--color-raised-surface);
-    border: 1px solid var(--color-border);
-    border-radius: 3px;
-    padding: 16px;
+.post pre {
     overflow-x: auto;
 }
 
-.post-project pre code {
-    background: none;
-    border: none;
-    padding: 0;
+.post pre code {
+    display: block;
     color: var(--color-primary-text);
 }
 
-.post-project blockquote {
+.post blockquote {
     border-left: 3px solid var(--color-accent-blue);
     background: var(--accent-bg);
     padding: 8px 16px;
@@ -71,12 +62,12 @@
     color: var(--color-muted-text);
 }
 
-.post-project table {
+.post table {
     border-collapse: collapse;
     width: 100%;
 }
 
-.post-project th {
+.post th {
     background: var(--color-raised-surface);
     color: var(--color-folder-blue);
     border: 1px solid var(--color-border);
@@ -84,16 +75,16 @@
     text-align: left;
 }
 
-.post-project td {
+.post td {
     border: 1px solid var(--color-border);
     padding: 8px 12px;
 }
 
-.post-project tr:nth-child(even) td {
+.post tr:nth-child(even) td {
     background: var(--color-raised-surface);
 }
 
-.post-project hr {
+.post hr {
     border: none;
     border-top: 1px solid var(--color-border);
     margin: 24px 0;

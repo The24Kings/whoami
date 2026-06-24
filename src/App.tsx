@@ -3,8 +3,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import { Home, Layout, NoPage, NoPost, Post, Projects } from './pages'
 import type { PostResp } from './Types';
 
-import './App.css'
-
 function loadProjects(): PostResp[] {
   // loads raw string content of every .md file in src/markdown/projects/
   const projectsPosts = import.meta.glob<Omit<PostResp, 'slug'>>(
