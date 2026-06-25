@@ -8,8 +8,7 @@
     ],
     "module": "esnext",
     "types": [
-      "vite/client",
-      "@react-router/dev"
+      "vite/client"
     ],
     "skipLibCheck": true,
     /* Bundler mode */
