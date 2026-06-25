@@ -14,7 +14,27 @@
 .post h4,
 .post h5,
 .post h6 {
+    position: relative;
     font-weight: 600;
+    scroll-margin-top: 4rem;
+}
+
+.post [id^="fnref"] {
+    scroll-margin-top: 3rem;
+}
+
+.post .header-anchor {
+    position: absolute;
+    font-size: 1.75rem;
+    left: -0.8em;
+    opacity: 0;
+    text-decoration: none;
+    color: var(--color-muted-text);
+    transition: opacity 0.15s;
+}
+
+.post :is(h1, h2, h3, h4, h5, h6):hover .header-anchor {
+    opacity: 1;
 }
 
 .post h1,
@@ -62,7 +82,7 @@
 .post .markdown-alert {
     border-left: 3px solid;
     padding: 8px 16px;
-    margin-left: 0;
+    margin: 18px 40px 18px 0;
     border-radius: 0 4px 4px 0;
 }
 
@@ -108,8 +128,15 @@
 }
 
 .post .markdown-alert-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     font-weight: 600;
     margin-bottom: 4px;
+}
+
+.post .markdown-alert-title svg {
+    fill: currentColor;
 }
 
 .post .markdown-alert-note {
