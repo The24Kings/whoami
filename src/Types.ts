@@ -1,10 +1,15 @@
 export type PostResp = {
     slug: string;
+    metadata: PostMetadata;
+    body: string; // markdown or HTML
+};
+
+export type PostMetadata = {
     title: string;
     date: string;
     tags?: string[];
-    body: string; // markdown or HTML
-};
+    desc: string;
+}
 
 export type ExternalLink = {
     name: string;

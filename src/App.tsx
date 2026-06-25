@@ -10,14 +10,16 @@ function loadGeneral(): SectionData {
     { eager: true, import: 'default' }
   );
 
+  var posts = Object.entries(generalPosts).map(([path, data]) => ({
+    slug: path.replace('./markdown/', ''),
+    ...data,
+    metadata: { tags: [], ...data.metadata },
+  }))
+
   return {
     posts: [
-      { slug: 'projects', title: 'Projects', date: '', body: '' },
-      ...Object.entries(generalPosts).map(([path, data]) => ({
-        slug: path.replace('./markdown/', ''),
-        tags: [],
-        ...data,
-      }))
+      { slug: 'projects', metadata: { title: 'Projects', date: '', desc: '' }, body: '' },
+      ...posts
     ],
     links: [
       { name: 'github', url: 'https://github.com/The24Kings' }
@@ -32,12 +34,14 @@ function loadProjects(): SectionData {
     { eager: true, import: 'default' }
   );
 
+  var posts = Object.entries(projectsPosts).map(([path, data]) => ({
+    slug: path.replace('./markdown/projects/', ''),
+    ...data,
+    metadata: { tags: [], ...data.metadata },
+  }))
+
   return {
-    posts: Object.entries(projectsPosts).map(([path, data]) => ({
-      slug: path.replace('./markdown/projects/', ''),
-      tags: [],
-      ...data,
-    })),
+    posts: posts,
     links: [],
   };
 }

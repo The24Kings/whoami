@@ -1,0 +1,15 @@
+.card-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    list-style: none;
+    margin: 0 auto;
+    padding: 24px 16px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+.card-list>* {
+    width: 100%;
+}

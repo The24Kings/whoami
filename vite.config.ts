@@ -9,7 +9,7 @@ function markdownPlugin() {
       if (!id.endsWith('.md')) return;
       const { data, content } = matter(code);
       return {
-        code: `export default ${JSON.stringify({ ...data, body: content })}`,
+        code: `export default ${JSON.stringify({ metadata: data, body: content })}`,
         map: null,
       };
     },

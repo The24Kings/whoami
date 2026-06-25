@@ -2,6 +2,7 @@
 title: Example Post
 date: 2026-06-23
 tags: [markdown, react]
+desc: A test markdown file for rendering all supported markdown features.
 ---
 
 # Headers
