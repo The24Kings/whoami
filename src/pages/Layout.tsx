@@ -17,11 +17,19 @@ const Layout: React.FC = () => {
     const segments = location.pathname.split('/').filter(Boolean);
 
     const cwdPath: CrumbData[] = [
-        { name: '~', variant: 'folder', onClick: () => navigate('/') },
+        {
+            name: '~', variant: 'folder', onClick: () => {
+                setCommand('cd ~')
+                navigate('/')
+            }
+        },
         ...segments.map((seg, i) => ({
             name: seg,
             variant: seg.endsWith('.md') ? 'file' : 'folder' as CrumbVariants,
-            onClick: () => navigate('/' + segments.slice(0, i + 1).join('/')),
+            onClick: () => {
+                if (seg.endsWith('.md')) { setCommand(`cd ${seg}`) } else { setCommand(`cd ${seg}/`) }
+                navigate('/' + segments.slice(0, i + 1).join('/'))
+            },
         })),
     ];
 
