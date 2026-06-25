@@ -1,7 +1,7 @@
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 import { useSetCommand } from './CommandContext';
-import Crumb from './Crumb';
-import type { ExternalLink, PostResp, SectionData } from '../Types';
+import { Crumb } from './Crumb';
+import type { ExternalLink, PostResp, SectionData } from '../types';
 
 import './NextPages.css';
 
@@ -38,7 +38,7 @@ function LinkEntry({ link }: { link: ExternalLink }) {
     );
 }
 
-function NextPages() {
+export function NextPages() {
     const { pathname } = useLocation();
     const matches = useMatches();
     const setCommand = useSetCommand();
@@ -88,5 +88,3 @@ function NextPages() {
         </>
     );
 }
-
-export default NextPages;

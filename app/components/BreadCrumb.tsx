@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Crumb from './Crumb';
+import { Crumb } from './Crumb';
 
 import type { CrumbData } from './Crumb';
 
@@ -10,7 +10,7 @@ interface BreadCrumbProps {
     command: string
 }
 
-const BreadCrumb: React.FC<BreadCrumbProps> = ({ path, command }) => {
+export const BreadCrumb: React.FC<BreadCrumbProps> = ({ path, command }) => {
     const [displayedCommand, setDisplayedCommand] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [showCursor, setShowCursor] = useState(true);
@@ -67,5 +67,3 @@ const BreadCrumb: React.FC<BreadCrumbProps> = ({ path, command }) => {
         </nav>
     );
 };
-
-export default BreadCrumb;

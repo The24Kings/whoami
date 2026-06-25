@@ -8,7 +8,7 @@ export interface CrumbData {
     onClick?: () => void;
 }
 
-const Crumb: React.FC<CrumbData> = ({
+export const Crumb: React.FC<CrumbData> = ({
     variant = 'folder',
     name,
     onClick,
@@ -24,5 +24,3 @@ const Crumb: React.FC<CrumbData> = ({
         </>
     )
 };
-
-export default Crumb;

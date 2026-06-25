@@ -1,4 +1,6 @@
-const NoPage = () => {
+import './post.css';
+
+export default function NoPage() {
     return (
         <>
             <div className="post">
@@ -7,5 +9,3 @@ const NoPage = () => {
         </>
     );
 };
-
-export default NoPage;

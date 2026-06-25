@@ -7,3 +7,5 @@ export function useSetCommand() {
     if (!set) throw new Error('useSetCommand must be used inside CommandContext.Provider');
     return set;
 }
+
+export default CommandContext

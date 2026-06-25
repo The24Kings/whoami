@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { reactRouter } from '@react-router/dev/vite'
 import matter from 'gray-matter'
 
 function markdownPlugin() {
@@ -17,5 +17,5 @@ function markdownPlugin() {
 }
 
 export default defineConfig({
-  plugins: [react(), markdownPlugin()],
+  plugins: [reactRouter(), markdownPlugin()],
 })

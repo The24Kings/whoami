@@ -1,5 +1,5 @@
 import React from 'react';
-import type { PostMetadata } from '../Types';
+import type { PostMetadata } from '../types';
 import './Card.css';
 
 export interface CardProps {
@@ -7,7 +7,7 @@ export interface CardProps {
     onClick?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({
+export const Card: React.FC<CardProps> = ({
     info,
     onClick,
 }) => {
@@ -28,5 +28,3 @@ const Card: React.FC<CardProps> = ({
         </li>
     )
 };
-
-export default Card;

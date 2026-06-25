@@ -1,14 +1,12 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { BreadCrumb } from "../components";
-import type { CrumbData, CrumbVariants } from "../components/Crumb";
-import NextPages from "../components/NextPages";
-import { useState } from "react";
-import { CommandContext } from "../components/CommandContext";
+import { Outlet } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
+import { useState } from 'react';
 
-import "./Layout.css"
+import { BreadCrumb, CommandContext, NextPages } from './components';
+import type { CrumbData, CrumbVariants } from './components';
 
-const Layout: React.FC = () => {
-    const [command, setCommand] = useState("echo welcome");
+export default function RootLayout() {
+    const [command, setCommand] = useState('echo welcome');
     const [showNav, setShowNav] = useState(false);
 
     const location = useLocation();
@@ -18,24 +16,30 @@ const Layout: React.FC = () => {
 
     const cwdPath: CrumbData[] = [
         {
-            name: '~', variant: 'folder', onClick: () => {
-                setCommand('cd ~')
-                navigate('/')
-            }
+            name: '~',
+            variant: 'folder',
+            onClick: () => {
+                setCommand('cd ~');
+                navigate('/');
+            },
         },
         ...segments.map((seg, i) => ({
             name: seg,
-            variant: seg.endsWith('.md') ? 'file' : 'folder' as CrumbVariants,
+            variant: (seg.endsWith('.md') ? 'file' : 'folder') as CrumbVariants,
             onClick: () => {
-                if (seg.endsWith('.md')) { setCommand(`cd ${seg}`) } else { setCommand(`cd ${seg}/`) }
-                navigate('/' + segments.slice(0, i + 1).join('/'))
+                if (seg.endsWith('.md')) {
+                    setCommand(`cd ${seg}`);
+                } else {
+                    setCommand(`cd ${seg}/`);
+                }
+                navigate('/' + segments.slice(0, i + 1).join('/'));
             },
         })),
     ];
 
     const handleNavShow = () => {
         setShowNav(true);
-        setCommand('ls');
+        setCommand('ls -a');
     };
 
     const handleNavHide = () => {
@@ -60,5 +64,3 @@ const Layout: React.FC = () => {
         </CommandContext.Provider>
     );
 }
-
-export default Layout

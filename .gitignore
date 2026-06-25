@@ -13,9 +13,11 @@ dist-ssr
 *.local
 
 .env
+build/
 
 # Editor directories and files
 .vscode/*
+.react-router/
 !.vscode/extensions.json
 .idea
 .DS_Store
