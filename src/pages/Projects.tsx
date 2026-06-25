@@ -1,6 +1,8 @@
 import { useNavigate, useRouteLoaderData } from "react-router-dom";
+import { Card } from "../components";
+
 import type { SectionData } from "../Types";
-import Card from "../components/Card";
+
 import './Projects.css';
 
 function Projects() {
