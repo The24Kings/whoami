@@ -1,11 +1,31 @@
-import { Outlet } from 'react-router';
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { useLocation, useNavigate } from 'react-router';
 import { useState } from 'react';
+import type { ReactNode } from 'react';
 
 import { BreadCrumb, CommandContext, NextPages } from './components';
 import type { CrumbData, CrumbVariants } from './components';
 
-export default function RootLayout() {
+export function Layout({ children }: { children: ReactNode }) {
+    return (
+        <html lang="en">
+            <head>
+                <meta charSet="UTF-8" />
+                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <Meta />
+                <Links />
+            </head>
+            <body>
+                <div id="root">{children}</div>
+                <ScrollRestoration />
+                <Scripts />
+            </body>
+        </html>
+    );
+}
+
+export default function SiteLayout({ children }: { children?: ReactNode }) {
     const [command, setCommand] = useState('echo welcome');
     const [showNav, setShowNav] = useState(false);
 
@@ -49,7 +69,8 @@ export default function RootLayout() {
 
     return (
         <CommandContext.Provider value={setCommand}>
-            <nav
+            <a className="skip-link" href="#main-content">Skip to main content</a>
+            <header
                 id="top-bar"
                 onMouseEnter={handleNavShow}
                 onMouseLeave={handleNavHide}
@@ -58,9 +79,11 @@ export default function RootLayout() {
             >
                 <BreadCrumb path={cwdPath} command={command} />
                 {showNav && <NextPages />}
-            </nav>
+            </header>
 
-            <Outlet />
+            <main id="main-content" tabIndex={-1}>
+                {children ?? <Outlet />}
+            </main>
         </CommandContext.Provider>
     );
 }

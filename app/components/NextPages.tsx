@@ -1,13 +1,10 @@
 import { useLocation, useMatches, useNavigate } from 'react-router-dom';
 import { useSetCommand } from './CommandContext';
 import { Crumb } from './Crumb';
+import { isSectionData } from '../lib';
 import type { ExternalLink, PostResp, SectionData } from '../types';
 
 import './NextPages.css';
-
-function isSectionData(data: unknown): data is SectionData {
-    return typeof data === 'object' && data !== null && 'posts' in data;
-}
 
 function PageEntry({ post, base }: { post: PostResp; base: string }) {
     const navigate = useNavigate();
@@ -31,7 +28,13 @@ function PageEntry({ post, base }: { post: PostResp; base: string }) {
 function LinkEntry({ link }: { link: ExternalLink }) {
     return (
         <li>
-            <a className="symlink" href={link.url} target="_blank" rel="noopener noreferrer">
+            <a
+                className="symlink"
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${link.name} (opens in a new tab)`}
+            >
                 <em>{link.name}</em> {"->"} <em>{link.url}</em>
             </a>
         </li>
@@ -57,7 +60,7 @@ export function NextPages() {
 
     return (
         <>
-            <nav id="navigation">
+            <nav id="navigation" aria-label="Directory contents">
                 <ul className="pages">
                     <li>
                         <Crumb

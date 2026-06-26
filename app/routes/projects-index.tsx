@@ -1,12 +1,12 @@
 import { useNavigate, useRouteLoaderData } from 'react-router';
-
 import { Card } from '../components';
-import type { SectionData } from '../types';
+import { isSectionData } from '../lib';
 
 import './projects-index.css';
 
 export default function ProjectsIndex() {
-    const { posts } = useRouteLoaderData('routes/projects') as SectionData;
+    const data = useRouteLoaderData('routes/projects');
+    const posts = isSectionData(data) ? data.posts : [];
     const navigate = useNavigate();
 
     const sorted = [...posts].sort((a, b) =>

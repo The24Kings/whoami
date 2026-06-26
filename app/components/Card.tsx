@@ -7,6 +7,13 @@ export interface CardProps {
     onClick?: () => void;
 }
 
+function onKeyDown(e: React.KeyboardEvent, onClick?: () => void) {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        onClick?.();
+    }
+}
+
 export const Card: React.FC<CardProps> = ({
     info,
     onClick,
@@ -15,13 +22,20 @@ export const Card: React.FC<CardProps> = ({
 
     return (
         <li>
-            <div className="card" onClick={onClick}>
+            <div
+                className="card"
+                role="button"
+                tabIndex={0}
+                aria-label={`View ${info.title}`}
+                onClick={onClick}
+                onKeyDown={e => onKeyDown(e, onClick)}
+            >
                 <div className="body">
-                    <h2 id="title">{info.title}</h2>
-                    <h4 id="date">{date}</h4>
-                    <pre id="desc"><code>{info.desc}</code></pre>
-                    <blockquote id="tags">
-                        {info.tags?.map(tag => <span key={tag} id="tag">{tag}</span>)}
+                    <h2 className="title">{info.title}</h2>
+                    <time className="date" dateTime={info.date}>{date}</time>
+                    <pre className="desc"><code>{info.desc}</code></pre>
+                    <blockquote className="tags">
+                        {info.tags?.map(tag => <span key={tag} className="tag">{tag}</span>)}
                     </blockquote>
                 </div>
             </div>

@@ -7,6 +7,7 @@
     "dev": "react-router dev",
     "build": "react-router build",
     "lint": "eslint .",
+    "type-check": "tsc --noEmit",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -21,7 +22,8 @@
     "markdown-it-task-lists": "^2.1.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-router-dom": "^7.18.0"
+    "react-router-dom": "^7.18.0",
+    "isbot": "^5"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

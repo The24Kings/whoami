@@ -6,21 +6,26 @@ export interface CrumbData {
     name: string;
     variant?: CrumbVariants;
     onClick?: () => void;
+    current?: boolean;
 }
 
 export const Crumb: React.FC<CrumbData> = ({
     variant = 'folder',
     name,
     onClick,
+    current = false,
 }) => {
     return (
-        <>
-            <span>
-                <a className="crumb" id={variant} onClick={onClick}>
-                    {name}
-                </a>
-                {variant === 'folder' && '/'}
-            </span>
-        </>
+        <span>
+            <button
+                type="button"
+                className={`crumb crumb-${variant}`}
+                aria-current={current ? 'page' : undefined}
+                onClick={onClick}
+            >
+                {name}
+            </button>
+            {variant === 'folder' && '/'}
+        </span>
     )
 };

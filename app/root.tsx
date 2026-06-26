@@ -1,10 +1,30 @@
-import { Links, Meta, Scripts, ScrollRestoration } from 'react-router';
-
-import RootLayout from './layout';
+import { isRouteErrorResponse, useRouteError } from 'react-router';
+import type { MetaFunction } from 'react-router';
+import SiteLayout from './layout';
 import type { PostResp, SectionData } from './types';
+import { normalizePosts } from './lib/posts';
+
+export { Layout } from './layout'; // Re-export for react-router
 
 import './index.css';
 import './layout.css';
+
+export const meta: MetaFunction = () => [
+    { title: 'The24Kings@portfolio: ~ _>' },
+    {
+        name: 'description',
+        content: 'Portfolio website by The24Kings showcasing projects and writing.',
+    },
+    { property: 'og:title', content: 'The24Kings@portfolio' },
+    {
+        property: 'og:description',
+        content: 'Portfolio website by The24Kings showcasing projects and writing.',
+    },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:site_name', content: 'The24Kings@portfolio' },
+    { name: 'twitter:card', content: 'summary' },
+    { name: 'theme-color', content: '#007acc' }, // Discord embed color
+];
 
 export function loader(): SectionData {
     const generalPosts = import.meta.glob<Omit<PostResp, 'slug'>>(
@@ -12,11 +32,7 @@ export function loader(): SectionData {
         { eager: true, import: 'default' }
     );
 
-    const posts = Object.entries(generalPosts).map(([path, data]) => ({
-        slug: path.replace('./markdown/', ''),
-        ...data,
-        metadata: { tags: [], ...data.metadata },
-    }));
+    const posts = normalizePosts(generalPosts, './markdown/');
 
     return {
         posts: [
@@ -30,23 +46,29 @@ export function loader(): SectionData {
 }
 
 export default function Root() {
+    return <SiteLayout />;
+}
+
+export function ErrorBoundary() {
+    const error = useRouteError();
+
+    let heading = 'Something went wrong';
+    let message = 'An unexpected error occurred.';
+
+    if (isRouteErrorResponse(error)) {
+        heading = `${error.status} ${error.statusText}`;
+        message = error.data || message;
+    } else if (error instanceof Error) {
+        message = error.message;
+    }
+
     return (
-        <html lang="en">
-            <head>
-                <meta charSet="UTF-8" />
-                <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>The24Kings@portfolio: ~ _&gt;</title>
-                <Meta />
-                <Links />
-            </head>
-            <body>
-                <div id="root">
-                    <RootLayout />
-                </div>
-                <ScrollRestoration />
-                <Scripts />
-            </body>
-        </html>
+        <SiteLayout>
+            <div className="post">
+                <h1 className="error">{heading}</h1>
+                <p>{message}</p>
+                <p><a href="/">Return home</a></p>
+            </div>
+        </SiteLayout>
     );
 }

@@ -3,3 +3,26 @@
     top: 0;
     z-index: 10;
 }
+
+#main-content:focus {
+    outline: none;
+}
+
+.skip-link {
+    position: absolute;
+    left: 8px;
+    top: -48px;
+    z-index: 100;
+    padding: 8px 16px;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--cli-cmd);
+    background: var(--cli-bg);
+    border: 1px solid var(--cli-border);
+    border-radius: 0 0 4px 4px;
+    transition: top 0.15s ease-in;
+}
+
+.skip-link:focus {
+    top: 0;
+}

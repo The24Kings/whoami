@@ -21,19 +21,29 @@
 .pages .crumb {
     text-decoration: none;
     cursor: pointer;
+    font: inherit;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
 .pages .crumb:hover {
     text-decoration: underline;
 }
 
+.pages .crumb:focus-visible {
+    outline: 2px solid var(--cli-path);
+    outline-offset: 2px;
+    text-decoration: underline;
+}
+
 /* Folders: . .. and directory entries */
-.pages #folder {
+.pages .crumb-folder {
     color: var(--color-folder-blue);
 }
 
 /* Files */
-.pages #file {
+.pages .crumb-file {
     color: var(--color-file-text);
 }
 
@@ -44,5 +54,11 @@
 }
 
 .symlink:hover {
+    text-decoration: underline;
+}
+
+.symlink:focus-visible {
+    outline: 2px solid var(--cli-user);
+    outline-offset: 2px;
     text-decoration: underline;
 }

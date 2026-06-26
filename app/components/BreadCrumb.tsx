@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Crumb } from './Crumb';
-
 import type { CrumbData } from './Crumb';
 
 import './BreadCrumb.css'
@@ -45,7 +44,7 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = ({ path, command }) => {
     }, [isTyping]);
 
     return (
-        <nav id="navbar">
+        <nav id="navbar" aria-label="Breadcrumb">
             <div className="prompt" >
                 <span className="user">portfolio</span>
                 <span className="cli-separator">@</span>
@@ -57,12 +56,13 @@ export const BreadCrumb: React.FC<BreadCrumbProps> = ({ path, command }) => {
                             name={crumb.name}
                             variant={crumb.variant}
                             onClick={crumb.onClick}
+                            current={i === path.length - 1}
                         />
                     ))}
                 </span>
                 <span className="separator">{'> '}</span>
                 <span className="cmd">{displayedCommand}</span>
-                <span className="cursor">{showCursor ? "█" : ""}</span>
+                <span className="cursor" aria-hidden="true">{showCursor ? "█" : ""}</span>
             </div>
         </nav>
     );

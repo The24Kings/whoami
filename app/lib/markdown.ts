@@ -14,10 +14,14 @@ const languageAliases: Record<string, string> = {
 
 function highlight(str: string, lang: string): string {
     const normalizedLang = languageAliases[lang?.toLowerCase()] ?? lang;
+
     if (normalizedLang && hljs.getLanguage(normalizedLang)) {
         try {
-            return `<pre><code class="hljs language-${normalizedLang}">${hljs.highlight(str, { language: normalizedLang }).value}</code></pre>`;
-        } catch { }
+            const escapedLang = md.utils.escapeHtml(normalizedLang);
+            return `<pre><code class="hljs language-${escapedLang}">${hljs.highlight(str, { language: normalizedLang }).value}</code></pre>`;
+        } catch {
+            // Fall back to the escaped, unhighlighted output below.
+        }
     }
     return md.utils.escapeHtml(str);
 }
