@@ -1,14 +1,13 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
-import { useLocation, useNavigate } from 'react-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-
 import { BreadCrumb, NextPages } from './components';
-import type { CrumbData, CrumbVariants } from './components';
 import { CommandContext } from './context';
+import { useCwdPath } from './lib';
 
 import './layout.css'
 
+/** THe base of the app that ultimately loads everything */
 export function Layout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
@@ -28,46 +27,21 @@ export function Layout({ children }: { children: ReactNode }) {
     );
 }
 
-export default function SiteLayout({ children }: { children?: ReactNode }) {
+/** Navigation and container around site content */
+export default function SiteContainer({ children }: { children?: ReactNode }) {
     const [command, setCommand] = useState('echo welcome');
-    const [showNav, setShowNav] = useState(false);
+    const [hovering, setHovering] = useState(false);
+    const [focused, setFocused] = useState(false);
+    const showNav = hovering || focused;
 
-    const location = useLocation();
-    const navigate = useNavigate();
+    useEffect(() => {
+        setCommand(showNav ? 'ls -a' : '');
+    }, [showNav]);
 
-    const segments = location.pathname.split('/').filter(Boolean);
-
-    const cwdPath: CrumbData[] = [
-        {
-            name: '~',
-            variant: 'folder',
-            onClick: () => {
-                setCommand('cd ~');
-                navigate('/');
-            },
-        },
-        ...segments.map((seg, i) => ({
-            name: seg,
-            variant: (seg.endsWith('.md') ? 'file' : 'folder') as CrumbVariants,
-            onClick: () => {
-                if (seg.endsWith('.md')) {
-                    setCommand(`cd ${seg}`);
-                } else {
-                    setCommand(`cd ${seg}/`);
-                }
-                navigate('/' + segments.slice(0, i + 1).join('/'));
-            },
-        })),
-    ];
-
-    const handleNavShow = () => {
-        setShowNav(true);
-        setCommand('ls -a');
-    };
-
-    const handleNavHide = () => {
-        setShowNav(false);
-        setCommand('');
+    const handleBlur = (e: React.FocusEvent<HTMLElement>) => {
+        // ignore focus moving between elements still inside the header
+        if (e.currentTarget.contains(e.relatedTarget as Node | null)) return;
+        setFocused(false);
     };
 
     return (
@@ -75,12 +49,12 @@ export default function SiteLayout({ children }: { children?: ReactNode }) {
             <a className="skip-link" href="#main-content">Skip to main content</a>
             <header
                 id="top-bar"
-                onMouseEnter={handleNavShow}
-                onMouseLeave={handleNavHide}
-                onFocus={handleNavShow}
-                onBlur={handleNavHide}
+                onMouseEnter={() => setHovering(true)}
+                onMouseLeave={() => { setHovering(false); setFocused(false); }}
+                onFocus={() => setFocused(true)}
+                onBlur={handleBlur}
             >
-                <BreadCrumb path={cwdPath} command={command} />
+                <BreadCrumb path={useCwdPath(setCommand)} command={command} />
                 {showNav && <NextPages />}
             </header>
 

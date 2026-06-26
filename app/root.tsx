@@ -1,8 +1,8 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router';
 import type { MetaFunction } from 'react-router';
-import SiteLayout from './layout';
+import SiteContainer from './layout';
 import type { PostResp, SectionData } from './types';
-import { normalizePosts } from './lib/posts';
+import { normalizePosts } from './lib';
 import { Article } from './components';
 
 export { Layout } from './layout'; // Re-export for react-router
@@ -51,7 +51,7 @@ export const loader = loadSite;
 export const clientLoader = loadSite;
 
 export default function Root() {
-    return <SiteLayout />;
+    return <SiteContainer />;
 }
 
 export function ErrorBoundary() {
@@ -68,12 +68,12 @@ export function ErrorBoundary() {
     }
 
     return (
-        <SiteLayout>
+        <SiteContainer>
             <Article>
                 <h1 className="error">{heading}</h1>
                 <p>{message}</p>
                 <p><a href="/">Return home</a></p>
             </Article>
-        </SiteLayout>
+        </SiteContainer>
     );
 }
