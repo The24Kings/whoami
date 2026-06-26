@@ -19,6 +19,10 @@
     scroll-margin-top: 4rem;
 }
 
+.post .subtext {
+    color: var(--text-sh)
+}
+
 .post [id^="fnref"] {
     scroll-margin-top: 3rem;
 }

@@ -13,6 +13,7 @@
 
   --text: var(--color-primary-text);
   --text-h: var(--color-primary-text);
+  --text-sh: var(--color-muted-text);
   --bg: var(--color-background);
   --border: var(--color-border);
   --code-bg: var(--color-raised-surface);

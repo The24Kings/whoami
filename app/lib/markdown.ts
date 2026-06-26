@@ -1,12 +1,15 @@
-import markdownit from 'markdown-it';
-import markdownitfootnote from 'markdown-it-footnote';
-import markdownItGithubAlerts from 'markdown-it-github-alerts';
-import markdownItTaskLists from 'markdown-it-task-lists';
-import markdownItLinkAttributes from 'markdown-it-link-attributes';
+import MarkdownIt from 'markdown-it';
+import MarkdownItFootnote from 'markdown-it-footnote';
+import MarkdownItGithubAlerts from 'markdown-it-github-alerts';
+import MarkdownItTaskLists from 'markdown-it-task-lists';
+import MarkdownItLinkAttributes from 'markdown-it-link-attributes';
 import anchor from 'markdown-it-anchor';
 import hljs from 'highlight.js';
 import parse from 'html-react-parser';
 import type { ReactNode } from 'react';
+import { subtext } from '../plugins/subtext';
+
+import 'highlight.js/styles/atom-one-dark.css';
 
 const languageAliases: Record<string, string> = {
     'c#': 'csharp',
@@ -28,19 +31,20 @@ function highlight(str: string, lang: string): string {
     return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`;
 }
 
-export const md = markdownit({
+export const md = MarkdownIt({
     html: true,
     linkify: true,
     typographer: true,
     highlight,
 })
-    .use(markdownitfootnote)
-    .use(markdownItGithubAlerts)
-    .use(markdownItTaskLists)
-    .use(markdownItLinkAttributes, {
+    .use(MarkdownItFootnote)
+    .use(MarkdownItGithubAlerts)
+    .use(MarkdownItTaskLists)
+    .use(MarkdownItLinkAttributes, {
         matcher: (href: string) => /^https?:\/\//.test(href),
         attrs: { target: '_blank', rel: 'noopener noreferrer' },
     })
+    .use(subtext)
     .use(anchor, {
         permalink: anchor.permalink.linkInsideHeader({
             symbol: '#',

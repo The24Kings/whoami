@@ -5,8 +5,6 @@ import { Article } from '../components';
 import { findPostBySlug, postMeta, renderMarkdown } from '../lib';
 import NoPage from './no-page';
 
-import 'highlight.js/styles/atom-one-dark.css';
-
 export const meta: MetaFunction = ({ params, matches }) => {
     const data = matches.find(m => m.id === 'root')?.loaderData;
     return postMeta(findPostBySlug(data, params.slug), 'Not found');

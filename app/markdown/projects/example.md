@@ -15,6 +15,8 @@ desc: A test markdown file for rendering all supported markdown features.
 ##### h5 Heading
 ###### h6 Heading
 
+-# Subtext
+
 Alternatively, for H1 and H2, an underline-ish style:
 
 Alt-H1
@@ -35,6 +37,8 @@ Alt-H2
 ##### h5 Heading
 
 ###### h6 Heading
+
+-# Subtext
 
 Alternatively, for H1 and H2, an underline-ish style:
 

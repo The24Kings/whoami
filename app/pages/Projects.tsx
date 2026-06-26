@@ -2,9 +2,9 @@ import { useNavigate, useRouteLoaderData } from 'react-router';
 import { Card } from '../components';
 import { isSectionData } from '../lib';
 
-import './projects-index.css';
+import './Projects.css';
 
-export default function ProjectsIndex() {
+export default function Projects() {
     const data = useRouteLoaderData('routes/projects');
     const posts = isSectionData(data) ? data.posts : [];
     const navigate = useNavigate();

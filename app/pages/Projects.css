@@ -13,9 +13,3 @@
 .card-list>* {
     width: 100%;
 }
-
-.empty-state {
-    text-align: center;
-    color: var(--color-muted-text);
-    padding: 24px 16px;
-}
