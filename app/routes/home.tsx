@@ -1,5 +1,5 @@
 import type { MetaFunction } from 'react-router';
-import './post.css';
+import { Article } from '../components';
 
 export const meta: MetaFunction = () => [
     { title: 'The24Kings@portfolio: ~ _>' },
@@ -7,8 +7,8 @@ export const meta: MetaFunction = () => [
 
 export default function Home() {
     return (
-        <div className="post">
+        <Article>
             <h1>Welcome</h1>
-        </div>
+        </Article>
     );
 }

@@ -5,6 +5,8 @@ import markdownItTaskLists from 'markdown-it-task-lists';
 import markdownItLinkAttributes from 'markdown-it-link-attributes';
 import anchor from 'markdown-it-anchor';
 import hljs from 'highlight.js';
+import parse from 'html-react-parser';
+import type { ReactNode } from 'react';
 
 const languageAliases: Record<string, string> = {
     'c#': 'csharp',
@@ -23,7 +25,7 @@ function highlight(str: string, lang: string): string {
             // Fall back to the escaped, unhighlighted output below.
         }
     }
-    return md.utils.escapeHtml(str);
+    return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`;
 }
 
 export const md = markdownit({
@@ -45,3 +47,8 @@ export const md = markdownit({
             placement: 'before',
         }),
     });
+
+/** Render a markdown string into React nodes. */
+export function renderMarkdown(body: string): ReactNode {
+    return parse(md.render(body));
+}

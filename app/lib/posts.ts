@@ -1,3 +1,4 @@
+import type { MetaDescriptor } from 'react-router';
 import type { PostResp, SectionData } from '../types';
 
 /** Normalize the result of an `import.meta.glob` markdown import into PostResp[] */
@@ -20,4 +21,28 @@ export function isSectionData(data: unknown): data is SectionData {
         'posts' in data &&
         Array.isArray((data as SectionData).posts)
     );
+}
+
+/** Find a post by slug within (possibly untyped) section loader data. */
+export function findPostBySlug(data: unknown, slug: string | undefined): PostResp | undefined {
+    if (!slug || !isSectionData(data)) return undefined;
+    return data.posts.find(p => p.slug === slug);
+}
+
+/** Build document <meta> for a post/page, falling back to a title when fields are missing. */
+export function postMeta(post: PostResp | undefined, fallbackTitle: string): MetaDescriptor[] {
+    const title = post?.metadata.title?.trim() || fallbackTitle;
+    const desc = post?.metadata.desc?.trim();
+
+    const description: MetaDescriptor[] = desc ? [
+        { name: 'description', content: desc },
+        { property: 'og:description', content: desc },
+    ] : [];
+
+    return [
+        { title: `${title} | The24Kings@portfolio` },
+        { property: 'og:title', content: title },
+        { property: 'og:type', content: 'article' },
+        ...description,
+    ];
 }

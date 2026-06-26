@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Crumb.css'
+
 export type CrumbVariants = 'folder' | 'file';
 
 export interface CrumbData {

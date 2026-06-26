@@ -87,10 +87,11 @@
 }
 
 #root {
-  max-width: 67vw;
-  margin-inline: auto;
-  border-inline: 1px solid var(--border);
+  margin: 0 auto;
+  position: relative;
+  max-width: 1000px;
   min-height: 100svh;
+  border-inline: 1px solid var(--border);
   display: flex;
   flex-direction: column;
 }

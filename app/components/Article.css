@@ -70,7 +70,6 @@
 
 .post pre {
     overflow-x: auto;
-    white-space: pre-wrap;
 }
 
 .post pre code {

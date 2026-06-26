@@ -3,11 +3,11 @@ import type { MetaFunction } from 'react-router';
 import SiteLayout from './layout';
 import type { PostResp, SectionData } from './types';
 import { normalizePosts } from './lib/posts';
+import { Article } from './components';
 
 export { Layout } from './layout'; // Re-export for react-router
 
 import './index.css';
-import './layout.css';
 
 export const meta: MetaFunction = () => [
     { title: 'The24Kings@portfolio: ~ _>' },
@@ -26,7 +26,7 @@ export const meta: MetaFunction = () => [
     { name: 'theme-color', content: '#007acc' }, // Discord embed color
 ];
 
-export function loader(): SectionData {
+function loadSite(): SectionData {
     const generalPosts = import.meta.glob<Omit<PostResp, 'slug'>>(
         './markdown/*.md',
         { eager: true, import: 'default' }
@@ -44,6 +44,11 @@ export function loader(): SectionData {
         ],
     };
 }
+
+// loader: runs at build time so prerendered pages get correct data + meta.
+// clientLoader: runs in the browser so non-prerendered slugs resolve client-side.
+export const loader = loadSite;
+export const clientLoader = loadSite;
 
 export default function Root() {
     return <SiteLayout />;
@@ -64,11 +69,11 @@ export function ErrorBoundary() {
 
     return (
         <SiteLayout>
-            <div className="post">
+            <Article>
                 <h1 className="error">{heading}</h1>
                 <p>{message}</p>
                 <p><a href="/">Return home</a></p>
-            </div>
+            </Article>
         </SiteLayout>
     );
 }

@@ -3,7 +3,7 @@ import type { MetaFunction } from 'react-router';
 import type { PostResp, SectionData } from '../types';
 import { normalizePosts } from '../lib';
 
-export function loader(): SectionData {
+function loadProjects(): SectionData {
     const projectsPosts = import.meta.glob<Omit<PostResp, 'slug'>>(
         '../markdown/projects/*.md',
         { eager: true, import: 'default' }
@@ -14,6 +14,11 @@ export function loader(): SectionData {
         links: [],
     };
 }
+
+// loader: runs at build time so prerendered pages get correct data + meta.
+// clientLoader: runs in the browser so non-prerendered slugs resolve client-side.
+export const loader = loadProjects;
+export const clientLoader = loadProjects;
 
 export const meta: MetaFunction = () => [
     { title: 'Projects | The24Kings@portfolio' },

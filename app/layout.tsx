@@ -3,8 +3,11 @@ import { useLocation, useNavigate } from 'react-router';
 import { useState } from 'react';
 import type { ReactNode } from 'react';
 
-import { BreadCrumb, CommandContext, NextPages } from './components';
+import { BreadCrumb, NextPages } from './components';
 import type { CrumbData, CrumbVariants } from './components';
+import { CommandContext } from './context';
+
+import './layout.css'
 
 export function Layout({ children }: { children: ReactNode }) {
     return (

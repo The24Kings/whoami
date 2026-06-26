@@ -1,2 +1,2 @@
-export { md } from './markdown'
-export { normalizePosts, isSectionData } from './posts'
+export { md, renderMarkdown } from './markdown'
+export { normalizePosts, isSectionData, findPostBySlug, postMeta } from './posts'

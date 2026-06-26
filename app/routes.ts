@@ -4,8 +4,7 @@ export default [
     index('routes/home.tsx'),
     route('projects', 'routes/projects.tsx', [
         index('routes/projects-index.tsx'),
-        route(':slug', 'routes/post.tsx', { id: 'project-post' }),
+        route(':slug', 'routes/post.tsx'),
     ]),
-    route(':slug', 'routes/post.tsx', { id: 'general-post' }),
-    route('*', 'routes/no-page.tsx'),
+    route(':slug', 'routes/page.tsx'),
 ] satisfies RouteConfig;
