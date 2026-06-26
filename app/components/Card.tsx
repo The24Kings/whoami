@@ -1,5 +1,6 @@
 import React from 'react';
 import type { PostMetadata } from '../types';
+
 import './Card.css';
 
 export interface CardProps {
@@ -14,10 +15,7 @@ function onKeyDown(e: React.KeyboardEvent, onClick?: () => void) {
     }
 }
 
-export const Card: React.FC<CardProps> = ({
-    info,
-    onClick,
-}) => {
+export const Card = ({ info, onClick }: CardProps) => {
     const date = info.date.split('T')[0];
 
     return (

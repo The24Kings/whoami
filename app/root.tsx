@@ -27,17 +27,15 @@ export const meta: MetaFunction = () => [
 ];
 
 function loadSite(): SectionData {
-    const generalPosts = import.meta.glob<Omit<PostResp, 'slug'>>(
+    const posts = import.meta.glob<Omit<PostResp, 'slug'>>(
         './markdown/*.md',
         { eager: true, import: 'default' }
     );
 
-    const posts = normalizePosts(generalPosts, './markdown/');
-
     return {
         posts: [
             { slug: 'projects', metadata: { title: 'Projects', date: '', desc: '' }, body: '' },
-            ...posts,
+            ...normalizePosts(posts, './markdown/'),
         ],
         links: [
             { name: 'github', url: 'https://github.com/The24Kings' },

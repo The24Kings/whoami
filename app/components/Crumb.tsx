@@ -1,5 +1,3 @@
-import React from 'react';
-
 import './Crumb.css'
 
 export type CrumbVariants = 'folder' | 'file';
@@ -11,12 +9,7 @@ export interface CrumbData {
     current?: boolean;
 }
 
-export const Crumb: React.FC<CrumbData> = ({
-    variant = 'folder',
-    name,
-    onClick,
-    current = false,
-}) => {
+export const Crumb = ({ variant = 'folder', name, onClick, current }: CrumbData) => {
     return (
         <span>
             <button

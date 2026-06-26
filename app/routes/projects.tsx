@@ -4,13 +4,13 @@ import type { PostResp, SectionData } from '../types';
 import { normalizePosts } from '../lib';
 
 function loadProjects(): SectionData {
-    const projectsPosts = import.meta.glob<Omit<PostResp, 'slug'>>(
+    const posts = import.meta.glob<Omit<PostResp, 'slug'>>(
         '../markdown/projects/*.md',
         { eager: true, import: 'default' }
     );
 
     return {
-        posts: normalizePosts(projectsPosts, '../markdown/projects/'),
+        posts: normalizePosts(posts, '../markdown/projects/'),
         links: [],
     };
 }

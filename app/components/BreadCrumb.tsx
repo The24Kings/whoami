@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Crumb } from './Crumb';
 import type { CrumbData } from './Crumb';
 
@@ -9,7 +9,7 @@ interface BreadCrumbProps {
     command: string
 }
 
-export const BreadCrumb: React.FC<BreadCrumbProps> = ({ path, command }) => {
+export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
     const [displayedCommand, setDisplayedCommand] = useState('');
     const [isTyping, setIsTyping] = useState(false);
     const [showCursor, setShowCursor] = useState(true);

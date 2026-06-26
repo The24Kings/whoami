@@ -6,7 +6,12 @@ import type { ExternalLink, PostResp, SectionData } from '../types';
 
 import './NextPages.css';
 
-function PageEntry({ post, base }: { post: PostResp; base: string }) {
+interface PageEntryProps {
+    post: PostResp;
+    base: string;
+}
+
+const PageEntry = ({ post, base }: PageEntryProps) => {
     const navigate = useNavigate();
     const setCommand = useSetCommand();
     const variant = /\.[^/]+$/.test(post.slug) ? 'file' : 'folder';
@@ -25,7 +30,11 @@ function PageEntry({ post, base }: { post: PostResp; base: string }) {
     );
 }
 
-function LinkEntry({ link }: { link: ExternalLink }) {
+interface LinkEntryProps {
+    link: ExternalLink;
+}
+
+const LinkEntry = ({ link }: LinkEntryProps) => {
     return (
         <li>
             <a
@@ -41,7 +50,7 @@ function LinkEntry({ link }: { link: ExternalLink }) {
     );
 }
 
-export function NextPages() {
+export const NextPages = () => {
     const { pathname } = useLocation();
     const matches = useMatches();
     const setCommand = useSetCommand();
@@ -59,35 +68,33 @@ export function NextPages() {
     const base = sectionMatch?.pathname === '/' ? '' : (sectionMatch?.pathname ?? '');
 
     return (
-        <>
-            <nav id="navigation" aria-label="Directory contents">
-                <ul className="pages">
-                    <li>
-                        <Crumb
-                            name="."
-                            variant="folder"
-                            onClick={() => {
-                                setCommand("cd .")
-                                navigate(pathname)
-                            }}
-                        />
-                    </li>
-                    <li>
-                        <Crumb
-                            name=".."
-                            variant="folder"
-                            onClick={() => {
-                                setCommand("cd ..")
-                                navigate(parentPath)
+        <nav id="navigation" aria-label="Directory contents">
+            <ul className="pages">
+                <li>
+                    <Crumb
+                        name="."
+                        variant="folder"
+                        onClick={() => {
+                            setCommand("cd .")
+                            navigate(pathname)
+                        }}
+                    />
+                </li>
+                <li>
+                    <Crumb
+                        name=".."
+                        variant="folder"
+                        onClick={() => {
+                            setCommand("cd ..")
+                            navigate(parentPath)
 
-                            }}
-                        />
-                    </li>
+                        }}
+                    />
+                </li>
 
-                    {posts.map(post => <PageEntry key={post.slug} post={post} base={base} />)}
-                    {links.map(link => <LinkEntry key={link.url} link={link} />)}
-                </ul>
-            </nav>
-        </>
+                {posts.map(post => <PageEntry key={post.slug} post={post} base={base} />)}
+                {links.map(link => <LinkEntry key={link.url} link={link} />)}
+            </ul>
+        </nav>
     );
 }
