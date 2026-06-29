@@ -16,7 +16,7 @@ function onKeyDown(e: React.KeyboardEvent, onClick?: () => void) {
 }
 
 export const Card = ({ info, onClick }: CardProps) => {
-    const date = info.date.split('T')[0];
+    const date = info.date?.split('T')[0];
 
     return (
         <li>
