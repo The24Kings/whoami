@@ -1,7 +1,7 @@
 ---
 title: Example Post
 date: 2026-06-23
-tags: [markdown, react]
+tags: [markdown, react, github, example]
 desc: A test markdown file for rendering all supported markdown features.
 ---
 
@@ -16,6 +16,8 @@ desc: A test markdown file for rendering all supported markdown features.
 ###### h6 Heading
 
 -# Subtext
+
+<!-- Comment ---> (should not render)
 
 Alternatively, for H1 and H2, an underline-ish style:
 
@@ -37,6 +39,8 @@ Alt-H2
 ##### h5 Heading
 
 ###### h6 Heading
+
+<!-- Comment --->
 
 -# Subtext
 
