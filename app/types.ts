@@ -6,6 +6,7 @@ export type PostResp = {
 };
 
 export type PostMetadata = {
+    image: string; // filepath
     title: string;
     date: string;
     tags?: string[];

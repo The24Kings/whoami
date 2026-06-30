@@ -1,4 +1,5 @@
 ---
+image: article/github.png
 title: Example Post
 date: 2026-06-23
 tags: [markdown, react, github, example]

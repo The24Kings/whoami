@@ -2,6 +2,8 @@ import React from 'react';
 import type { PostMetadata } from '../types';
 
 import './Card.css';
+import { useTagFilter } from '../lib';
+import { useSetCommand } from '../context';
 
 export interface CardProps {
     info: PostMetadata;
@@ -16,27 +18,46 @@ function onKeyDown(e: React.KeyboardEvent, onClick?: () => void) {
 }
 
 export const Card = ({ info, onClick }: CardProps) => {
+    const { active, toggleTag } = useTagFilter();
+    const setCommand = useSetCommand();
     const date = info.date?.split('T')[0];
+    const src = info.image?.trim();
+
+    const tags = info.tags ?? [];
+    const sorted = [...tags].sort((a, b) => a.localeCompare(b));
+
+    const onTagSelect = (e: React.MouseEvent, tag: string) => {
+        e.stopPropagation();
+        const next = toggleTag(tag);
+        setCommand(next.length ? next.map(t => `grep ${t}`).join(' | ') : '');
+    }
 
     return (
-        <li>
-            <div
-                className="card"
-                role="button"
-                tabIndex={0}
-                aria-label={`View ${info.title}`}
-                onClick={onClick}
-                onKeyDown={e => onKeyDown(e, onClick)}
-            >
-                <div className="body">
-                    <h2 className="title">{info.title}</h2>
-                    <time className="date" dateTime={info.date}>{date}</time>
-                    <pre className="desc"><code>{info.desc}</code></pre>
-                    <blockquote className="tags">
-                        {info.tags?.map(tag => <span key={tag} className="tag">{tag}</span>)}
-                    </blockquote>
-                </div>
+        <div
+            className="card"
+            role="button"
+            tabIndex={0}
+            aria-label={`View ${info.title}`}
+            onClick={onClick}
+            onKeyDown={e => onKeyDown(e, onClick)}
+        >
+            {src && <div className="img"><img src={src} alt={info.title} /></div>}
+            <div className="body">
+                <h2 className="title">{info.title}</h2>
+                <time className="date" dateTime={info.date}>{date}</time>
+                <pre className="desc"><code>{info.desc}</code></pre>
+                <blockquote className="tags">
+                    {sorted?.map(tag =>
+                        <button
+                            key={tag}
+                            className={active.includes(tag) ? 'tag active' : 'tag'}
+                            onClick={e => onTagSelect(e, tag)}
+                        >
+                            {tag}
+                        </button>
+                    )}
+                </blockquote>
             </div>
-        </li>
+        </div>
     )
 };

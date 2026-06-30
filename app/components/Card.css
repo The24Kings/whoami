@@ -1,4 +1,6 @@
 .card {
+    display: flex;
+    flex-direction: row;
     background: var(--color-panel-card);
     border: 1px solid var(--color-border);
     border-radius: 8px;
@@ -16,6 +18,18 @@
     outline: 2px solid var(--color-accent-blue);
     outline-offset: 2px;
     border-color: var(--color-accent-blue);
+}
+
+.card .img {
+    align-self: stretch;
+    flex-shrink: 0;
+    width: 190px;
+}
+
+.card .img img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
 }
 
 .card .body {
@@ -78,8 +92,21 @@
     padding: 2px 8px;
     border-radius: 8px;
     font-size: 0.8rem;
+    line-height: 2;
+    cursor: pointer;
     font-family: var(--mono);
     color: var(--color-tag-text);
     background: var(--accent-bg);
     border: 1px solid var(--accent-border);
+}
+
+.card .tags .tag:hover {
+    color: var(--color-primary-text);
+    border-color: var(--color-accent-blue);
+}
+
+.card .tags .tag.active {
+    color: var(--color-primary-text);
+    background: var(--color-accent-blue);
+    border-color: var(--color-accent-blue);
 }
