@@ -36,6 +36,8 @@
 }
 
 .card .body {
+    width: 100%;
+    box-sizing: border-box;
     padding: 16px 20px;
     display: flex;
     flex-direction: column;
