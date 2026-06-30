@@ -33,10 +33,17 @@ export function findPostBySlug(data: unknown, slug: string | undefined): PostRes
 export function postMeta(post: PostResp | undefined, fallbackTitle: string): MetaDescriptor[] {
     const title = post?.metadata.title?.trim() || fallbackTitle;
     const desc = post?.metadata.desc?.trim();
+    const image = post?.metadata.image?.trim();
 
     const description: MetaDescriptor[] = desc ? [
         { name: 'description', content: desc },
         { property: 'og:description', content: desc },
+    ] : [];
+
+    const imageMeta: MetaDescriptor[] = image ? [
+        { property: 'og:image', content: image },
+        { name: 'twitter:image', content: image },
+        { name: 'twitter:card', content: 'summary_large_image' },
     ] : [];
 
     return [
@@ -44,5 +51,6 @@ export function postMeta(post: PostResp | undefined, fallbackTitle: string): Met
         { property: 'og:title', content: title },
         { property: 'og:type', content: 'article' },
         ...description,
+        ...imageMeta,
     ];
 }

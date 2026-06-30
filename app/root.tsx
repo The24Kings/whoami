@@ -34,7 +34,7 @@ function loadSite(): SectionData {
 
     return {
         posts: [
-            { slug: 'projects', metadata: { title: 'Projects', date: '', desc: '' }, body: '' },
+            { slug: 'projects', metadata: { image: '', title: 'Projects', date: '', desc: '' }, body: '' },
             ...normalizePosts(posts, './markdown/'),
         ],
         links: [
