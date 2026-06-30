@@ -1,8 +1,7 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router';
 import type { MetaFunction } from 'react-router';
 import SiteContainer from './layout';
-import type { PostResp, SectionData } from './types';
-import { normalizePosts } from './lib';
+import type { SectionData } from './types';
 import { Article } from './components';
 
 export { Layout } from './layout'; // Re-export for react-router
@@ -27,15 +26,11 @@ export const meta: MetaFunction = () => [
 ];
 
 function loadSite(): SectionData {
-    const posts = import.meta.glob<Omit<PostResp, 'slug'>>(
-        './markdown/*.md',
-        { eager: true, import: 'default' }
-    );
-
     return {
-        posts: [
+        pages: [
             { slug: 'projects', metadata: { image: '', title: 'Projects', date: '', desc: '' }, body: '' },
-            ...normalizePosts(posts, './markdown/'),
+            { slug: 'about.md', metadata: { image: '', title: 'About', date: '', desc: 'About The24Kings and this portfolio.' }, body: '' },
+            { slug: 'contact.md', metadata: { image: '', title: 'Contact', date: '', desc: 'How to get in touch with The24Kings.' }, body: '' },
         ],
         links: [
             { name: 'github', url: 'https://github.com/The24Kings' },
@@ -49,6 +44,10 @@ export const loader = loadSite;
 export const clientLoader = loadSite;
 
 export default function Root() {
+    return <SiteContainer />;
+}
+
+export function HydrateFallback() {
     return <SiteContainer />;
 }
 

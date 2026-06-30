@@ -64,7 +64,7 @@ export const NextPages = () => {
 
     const sectionData = sectionMatch?.pathname === pathname ? sectionMatch.loaderData as SectionData : null;
 
-    const posts = sectionData?.posts ?? [];
+    const pages = sectionData?.pages ?? [];
     const links = sectionData?.links ?? [];
     const base = sectionMatch?.pathname === '/' ? '' : (sectionMatch?.pathname ?? '');
 
@@ -100,7 +100,7 @@ export const NextPages = () => {
                     />
                 </motion.li>
 
-                {posts.map(post => <PageEntry key={post.slug} post={post} base={base} />)}
+                {pages.map(page => <PageEntry key={page.slug} post={page} base={base} />)}
                 {links.map(link => <LinkEntry key={link.url} link={link} />)}
             </motion.ul>
         </motion.nav>

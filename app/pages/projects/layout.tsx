@@ -1,16 +1,15 @@
 import { Outlet } from 'react-router';
 import type { MetaFunction } from 'react-router';
-import type { PostResp, SectionData } from '../types';
-import { normalizePosts } from '../lib';
+import type { PostResp, SectionData } from '../../types';
+import { normalizePosts } from '../../lib';
 
 function loadProjects(): SectionData {
     const posts = import.meta.glob<Omit<PostResp, 'slug'>>(
-        '../markdown/projects/*.md',
-        { eager: true, import: 'default' }
+        '../../markdown/*.md', { eager: true, import: 'default' }
     );
 
     return {
-        posts: normalizePosts(posts, '../markdown/projects/'),
+        pages: normalizePosts(posts, '../../markdown/'),
         links: [],
     };
 }

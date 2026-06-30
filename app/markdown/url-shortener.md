@@ -1,5 +1,5 @@
 ---
-image: article/vash.jpg
+image: vash.jpg
 title: URL Shortener
 date: 2026-04-07
 tags: [node, api, docker, typescript]

@@ -20,6 +20,6 @@ export type ExternalLink = {
 
 // Defines the output of the `ls` command in NextPages
 export type SectionData = {
-    posts: PostResp[];
+    pages: PostResp[];
     links: ExternalLink[];
 };

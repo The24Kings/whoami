@@ -18,15 +18,15 @@ export function isSectionData(data: unknown): data is SectionData {
     return (
         typeof data === 'object' &&
         data !== null &&
-        'posts' in data &&
-        Array.isArray((data as SectionData).posts)
+        'pages' in data &&
+        Array.isArray((data as SectionData).pages)
     );
 }
 
 /** Find a post by slug within (possibly untyped) section loader data. */
 export function findPostBySlug(data: unknown, slug: string | undefined): PostResp | undefined {
     if (!slug || !isSectionData(data)) return undefined;
-    return data.posts.find(p => p.slug === slug);
+    return data.pages.find(p => p.slug === slug);
 }
 
 /** Build document <meta> for a post/page, falling back to a title when fields are missing. */

@@ -1,14 +1,14 @@
 import { useNavigate, useRouteLoaderData } from 'react-router';
 import { AnimatePresence, motion } from 'motion/react';
-import { Card } from '../components';
-import { useSetCommand } from '../context';
-import { fadeIn, isSectionData, useTagFilter } from '../lib';
+import { Card } from '../../components';
+import { useSetCommand } from '../../context';
+import { fadeIn, isSectionData, useTagFilter, RouteId } from '../../lib';
 
-import './Projects.css';
+import './projects.css';
 
 export default function Projects() {
-    const data = useRouteLoaderData('routes/projects');
-    const posts = isSectionData(data) ? data.posts : [];
+    const data = useRouteLoaderData(RouteId.projects);
+    const posts = isSectionData(data) ? data.pages : [];
     const navigate = useNavigate();
     const setCommand = useSetCommand();
     const { active } = useTagFilter();
