@@ -1,7 +1,8 @@
 import { useNavigate, useRouteLoaderData } from 'react-router';
+import { AnimatePresence, motion } from 'motion/react';
 import { Card } from '../components';
 import { useSetCommand } from '../context';
-import { isSectionData, useTagFilter } from '../lib';
+import { fadeIn, isSectionData, useTagFilter } from '../lib';
 
 import './Projects.css';
 
@@ -20,18 +21,26 @@ export default function Projects() {
 
     return (
         <ul className="card-list">
-            {visible.map(post => (
-                <li>
-                    <Card
+            <AnimatePresence mode="sync">
+                {visible.map(post => (
+                    <motion.li
                         key={post.slug}
-                        info={post.metadata}
-                        onClick={() => {
-                            setCommand(`cat ${post.slug}`)
-                            navigate(`/projects/${post.slug}`)
-                        }}
-                    />
-                </li>
-            ))}
+                        layout
+                        variants={fadeIn}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                    >
+                        <Card
+                            info={post.metadata}
+                            onClick={() => {
+                                setCommand(`cat ${post.slug}`)
+                                navigate(`/projects/${post.slug}`)
+                            }}
+                        />
+                    </motion.li>
+                ))}
+            </AnimatePresence>
         </ul>
     );
 }

@@ -1,6 +1,7 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
+import { AnimatePresence, MotionConfig } from 'motion/react';
 import { BreadCrumb, NextPages } from './components';
 import { CommandContext } from './context';
 import { useCwdPath } from './lib';
@@ -45,22 +46,26 @@ export default function SiteContainer({ children }: { children?: ReactNode }) {
     };
 
     return (
-        <CommandContext.Provider value={setCommand}>
-            <a className="skip-link" href="#main-content">Skip to main content</a>
-            <header
-                id="top-bar"
-                onMouseEnter={() => setHovering(true)}
-                onMouseLeave={() => { setHovering(false); setFocused(false); }}
-                onFocus={() => setFocused(true)}
-                onBlur={handleBlur}
-            >
-                <BreadCrumb path={useCwdPath(setCommand)} command={command} />
-                {showNav && <NextPages />}
-            </header>
+        <MotionConfig reducedMotion="user">
+            <CommandContext.Provider value={setCommand}>
+                <a className="skip-link" href="#main-content">Skip to main content</a>
+                <header
+                    id="top-bar"
+                    onMouseEnter={() => setHovering(true)}
+                    onMouseLeave={() => { setHovering(false); setFocused(false); }}
+                    onFocus={() => setFocused(true)}
+                    onBlur={handleBlur}
+                >
+                    <BreadCrumb path={useCwdPath(setCommand)} command={command} />
+                    <AnimatePresence>
+                        {showNav && <NextPages />}
+                    </AnimatePresence>
+                </header>
 
-            <main id="main-content" tabIndex={-1}>
-                {children ?? <Outlet />}
-            </main>
-        </CommandContext.Provider>
+                <main id="main-content" tabIndex={-1}>
+                    {children ?? <Outlet />}
+                </main>
+            </CommandContext.Provider>
+        </MotionConfig>
     );
 }

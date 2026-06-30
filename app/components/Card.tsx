@@ -1,9 +1,10 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import type { PostMetadata } from '../types';
+import { hoverScale, tapScale, useTagFilter } from '../lib';
+import { useSetCommand } from '../context';
 
 import './Card.css';
-import { useTagFilter } from '../lib';
-import { useSetCommand } from '../context';
 
 export interface CardProps {
     info: PostMetadata;
@@ -33,13 +34,15 @@ export const Card = ({ info, onClick }: CardProps) => {
     }
 
     return (
-        <div
+        <motion.div
             className="card"
             role="button"
             tabIndex={0}
             aria-label={`View ${info.title}`}
             onClick={onClick}
             onKeyDown={e => onKeyDown(e, onClick)}
+            whileHover={hoverScale}
+            whileTap={tapScale}
         >
             {src && <div className="img"><img src={src} alt={info.title} /></div>}
             <div className="body">
@@ -48,16 +51,18 @@ export const Card = ({ info, onClick }: CardProps) => {
                 <pre className="desc"><code>{info.desc}</code></pre>
                 <blockquote className="tags">
                     {sorted?.map(tag =>
-                        <button
+                        <motion.button
                             key={tag}
                             className={active.includes(tag) ? 'tag active' : 'tag'}
                             onClick={e => onTagSelect(e, tag)}
+                            whileHover={hoverScale}
+                            whileTap={tapScale}
                         >
                             {tag}
-                        </button>
+                        </motion.button>
                     )}
                 </blockquote>
             </div>
-        </div>
+        </motion.div>
     )
 };

@@ -1,7 +1,8 @@
+import { motion } from 'motion/react';
 import { useLocation, useMatches, useNavigate } from 'react-router';
 import { useSetCommand } from '../context';
 import { Crumb } from './Crumb';
-import { isSectionData } from '../lib';
+import { isSectionData, slideDown, staggerContainer, staggerItem } from '../lib';
 import type { ExternalLink, PostResp, SectionData } from '../types';
 
 import './NextPages.css';
@@ -17,7 +18,7 @@ const PageEntry = ({ post, base }: PageEntryProps) => {
     const variant = /\.[^/]+$/.test(post.slug) ? 'file' : 'folder';
 
     return (
-        <li>
+        <motion.li variants={staggerItem}>
             <Crumb
                 name={post.slug}
                 variant={variant}
@@ -26,7 +27,7 @@ const PageEntry = ({ post, base }: PageEntryProps) => {
                     navigate(`${base}/${post.slug}`)
                 }}
             />
-        </li>
+        </motion.li>
     );
 }
 
@@ -36,7 +37,7 @@ interface LinkEntryProps {
 
 const LinkEntry = ({ link }: LinkEntryProps) => {
     return (
-        <li>
+        <motion.li variants={staggerItem}>
             <a
                 className="symlink"
                 href={link.url}
@@ -46,7 +47,7 @@ const LinkEntry = ({ link }: LinkEntryProps) => {
             >
                 <em>{link.name}</em> {"->"} <em>{link.url}</em>
             </a>
-        </li>
+        </motion.li>
     );
 }
 
@@ -68,9 +69,16 @@ export const NextPages = () => {
     const base = sectionMatch?.pathname === '/' ? '' : (sectionMatch?.pathname ?? '');
 
     return (
-        <nav id="navigation" aria-label="Directory contents">
-            <ul className="pages">
-                <li>
+        <motion.nav
+            id="navigation"
+            aria-label="Directory contents"
+            variants={slideDown}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+        >
+            <motion.ul className="pages" variants={staggerContainer}>
+                <motion.li variants={staggerItem}>
                     <Crumb
                         name="."
                         variant="folder"
@@ -79,8 +87,8 @@ export const NextPages = () => {
                             navigate(pathname)
                         }}
                     />
-                </li>
-                <li>
+                </motion.li>
+                <motion.li variants={staggerItem}>
                     <Crumb
                         name=".."
                         variant="folder"
@@ -90,11 +98,11 @@ export const NextPages = () => {
 
                         }}
                     />
-                </li>
+                </motion.li>
 
                 {posts.map(post => <PageEntry key={post.slug} post={post} base={base} />)}
                 {links.map(link => <LinkEntry key={link.url} link={link} />)}
-            </ul>
-        </nav>
+            </motion.ul>
+        </motion.nav>
     );
 }

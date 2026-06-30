@@ -26,7 +26,10 @@ export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
             if (index > command.length) setIsTyping(false);
         };
 
-        animate(0);
+        // Let the breadcrumb paint before the very first command types out
+        const startTimeout = setTimeout(() => animate(0), 50);
+
+        return () => clearTimeout(startTimeout);
     }, [command]);
 
     // Blinking Cursor
@@ -52,7 +55,7 @@ export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
                 <span className="cwd">
                     {path.map((crumb, i) => (
                         <Crumb
-                            key={i}
+                            key={`${crumb.name}-${i}`}
                             name={crumb.name}
                             variant={crumb.variant}
                             onClick={crumb.onClick}

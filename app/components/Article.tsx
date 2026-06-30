@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react';
+import { motion } from 'motion/react';
+import { fadeIn } from '../lib';
 
 import './Article.css'
 
@@ -9,8 +11,13 @@ interface ArticleProps {
 /** Wraps page/post content in the shared article layout. */
 export const Article = ({ children }: ArticleProps) => {
     return (
-        <div className="post" >
+        <motion.div
+            className="post"
+            variants={fadeIn}
+            initial="initial"
+            animate="animate"
+        >
             <div id="md-content">{children}</div>
-        </div >
+        </motion.div>
     );
 }
