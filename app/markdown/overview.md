@@ -51,7 +51,7 @@ _______.---./    .'                    \_.--._ ___________
              ''    .'
 ```
 
-My Lurk Server was written primarily in Rust. The server is currently undergoing a complete rewritee from the gorund up, however, the client currently only connects to the server and recieves the [GAME](https://github.com/The24Kings/LurkProtocol/wiki/Messages:-Types#Game) and [VERSION](https://github.com/The24Kings/LurkProtocol/wiki/Messages:-Types#Version) messages.
+My Lurk Server was written primarily in Rust. The server is currently undergoing a complete rewrite from the ground up, however, the client currently only connects to the server and receives the [GAME](https://github.com/The24Kings/LurkProtocol/wiki/Messages:-Types#Game) and [VERSION](https://github.com/The24Kings/LurkProtocol/wiki/Messages:-Types#Version) messages.
 
 ---
 
@@ -65,7 +65,7 @@ As the Product Owner, my job in the scrum development framework, I am accountabl
 
 ![Budget Craft Poster](https://isoptera.lcsc.edu/~rjziegler/pictures/capstone-poster.png)
 
-Pictured above is our poster given at the annual LCSC Research Symposium
+Pictured above is our poster given at the annual [LCSC Research Symposium](https://www.lcsc.edu/academic-affairs/research-symposium)
 
 ---
 
@@ -73,7 +73,7 @@ Pictured above is our poster given at the annual LCSC Research Symposium
 
 > Based on the popular GMOD map created by [PixelTail Games](https://www.pixeltailgames.com/elevator/) and heavily inspired by [ThePebblePrince](https://www.youtube.com/channel/UCHobjD55wR4c-5bD0AHDcEQ)
 
-Normal Elevator is a multiplayer game made using Minecraft commands (scripting) that takes players to random wacky floors. These floors can consist of anything ranging from the jungle, to the middle of the desert, and back to an office building. Each player will be taken to 10 different floors, can you visit them all and find all their secrets??
+Normal Elevator is a multiplayer game made using Minecraft commands (scripting) that takes players to random wacky floors. These floors can consist of anything ranging from the jungle, to the middle of the desert, and back to an office building. Each player will be taken to 10 different floors, can you visit them all and find all their secrets?
 
 ![Minecraft Map](https://isoptera.lcsc.edu/~rjziegler/pictures/elevator_entrance.png)
 
@@ -91,6 +91,6 @@ Pictured above is a graphical output of the Sine Approximation program, Blue = E
 
 ---
 
-## [Website](https://github.com/The24Kings/main-website)
+## [Website](https://github.com/The24Kings/whoami)
 
-Here is the link to the source code for this website! It is written in React JS and will serve as a portfolio of sorts for my various projects and applications
+Here is the link to the source code for this website! Built with React, TypeScript, and Vite; it serves as a portfolio of sorts for my various projects and applications
