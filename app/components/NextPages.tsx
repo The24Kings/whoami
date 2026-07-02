@@ -106,7 +106,7 @@ export const NextPages = ({ open }: NextPagesProps) => {
             initial="exit"
             animate={open ? 'animate' : 'exit'}
         >
-            <motion.ul className="pages" variants={staggerContainer}>
+            <motion.ul className="pages" variants={staggerContainer} inert={!open}>
                 <NavigateEntry name="." to={pathname} label="Current directory" />
                 <NavigateEntry name=".." to={parentPath} label="Back" />
 
