@@ -103,11 +103,17 @@
     color: var(--color-tag-text);
     background: var(--accent-bg);
     border: 1px solid var(--accent-border);
+    transition: transform 0.15s ease;
 }
 
 .card .tags .tag:hover {
     color: var(--color-primary-text);
     border-color: var(--color-accent-blue);
+    transform: scale(1.01);
+}
+
+.card .tags .tag:active {
+    transform: scale(0.99);
 }
 
 .card .tags .tag.active {

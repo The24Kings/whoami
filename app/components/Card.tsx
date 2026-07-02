@@ -18,6 +18,10 @@ function onKeyDown(e: React.KeyboardEvent, onClick?: () => void) {
     }
 }
 
+function stopPointerPropagation(el: HTMLButtonElement | null) {
+    el?.addEventListener('pointerdown', e => e.stopPropagation());
+}
+
 export const Card = ({ info, onClick }: CardProps) => {
     const { active, toggleTag } = useTagFilter();
     const setCommand = useSetCommand();
@@ -51,15 +55,14 @@ export const Card = ({ info, onClick }: CardProps) => {
                 <pre className="desc"><code>{info.desc}</code></pre>
                 <blockquote className="tags">
                     {sorted?.map(tag =>
-                        <motion.button
+                        <button
                             key={tag}
+                            ref={stopPointerPropagation}
                             className={active.includes(tag) ? 'tag active' : 'tag'}
                             onClick={e => onTagSelect(e, tag)}
-                            whileHover={hoverScale}
-                            whileTap={tapScale}
                         >
                             {tag}
-                        </motion.button>
+                        </button>
                     )}
                 </blockquote>
             </div>
