@@ -6,6 +6,7 @@ tags: [Rust, TypeScript, Minecraft, C++, TCP/IP]
 desc: An overview of major projects I have created and worked on.
 ---
 
+<!-- markdownlint-disable-next-line MD025 -->
 # Overview
 
 ## [Lurk Server](https://github.com/The24Kings/ZeldaServer)

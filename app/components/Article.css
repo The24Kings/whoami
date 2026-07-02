@@ -144,13 +144,17 @@
     inset: 0;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.85);
+    background: var(--overlay-background);
     cursor: zoom-out;
     z-index: 1000;
 }
 
 .post .expandable-img-overlay:target {
     display: flex;
+}
+
+html:has(.post .expandable-img-overlay:target) {
+    overflow: hidden;
 }
 
 .post .expandable-img-overlay img {

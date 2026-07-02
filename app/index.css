@@ -43,6 +43,8 @@
   --alert-caution: #f85149;
   --alert-caution-bg: rgba(248, 81, 73, 0.1);
 
+  --overlay-background: rgba(0, 0, 0, 0.75);
+
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
