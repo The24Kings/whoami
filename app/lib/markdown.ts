@@ -7,7 +7,8 @@ import anchor from 'markdown-it-anchor';
 import hljs from 'highlight.js';
 import parse from 'html-react-parser';
 import type { ReactNode } from 'react';
-import { subtext } from '../plugins/subtext';
+
+import { subtext, expandableImage } from '../plugins';
 
 import 'highlight.js/styles/atom-one-dark.css';
 
@@ -45,6 +46,7 @@ export const md = MarkdownIt({
         attrs: { target: '_blank', rel: 'noopener noreferrer' },
     })
     .use(subtext)
+    .use(expandableImage)
     .use(anchor, {
         permalink: anchor.permalink.linkInsideHeader({
             symbol: '#',
