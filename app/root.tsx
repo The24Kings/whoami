@@ -9,7 +9,7 @@ export { Layout } from './layout'; // Re-export for react-router
 import './index.css';
 
 export const meta: MetaFunction = () => [
-    { title: 'The24Kings@portfolio: ~ _>' },
+    { title: 'The24Kings@portfolio' },
     {
         name: 'description',
         content: 'Portfolio website by The24Kings showcasing projects and writing.',

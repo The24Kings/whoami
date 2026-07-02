@@ -2,7 +2,7 @@ import type { MetaFunction } from 'react-router';
 import { Article } from '../components';
 
 export const meta: MetaFunction = () => [
-    { title: 'The24Kings@portfolio: ~ _>' },
+    { title: 'The24Kings@portfolio' },
 ];
 
 export default function Home() {

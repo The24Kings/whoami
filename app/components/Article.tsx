@@ -17,7 +17,7 @@ export const Article = ({ children }: ArticleProps) => {
             initial={false}
             animate="animate"
         >
-            <article id="md-content">{children}</article>
+            <div id="md-content">{children}</div>
         </motion.div>
     );
 }
