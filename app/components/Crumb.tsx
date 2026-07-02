@@ -1,22 +1,22 @@
+import type { ButtonHTMLAttributes } from 'react';
 import './Crumb.css'
 
 export type CrumbVariants = 'folder' | 'file';
 
-export interface CrumbData {
+export interface CrumbProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     name: string;
     variant?: CrumbVariants;
-    onClick?: () => void;
     current?: boolean;
 }
 
-export const Crumb = ({ variant = 'folder', name, onClick, current }: CrumbData) => {
+export const Crumb = ({ variant = 'folder', name, current, ...rest }: CrumbProps) => {
     return (
         <span>
             <button
                 type="button"
                 className={`crumb crumb-${variant}`}
                 aria-current={current ? 'page' : undefined}
-                onClick={onClick}
+                {...rest}
             >
                 {name}
             </button>

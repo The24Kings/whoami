@@ -16,12 +16,14 @@ const PageEntry = ({ post, base }: PageEntryProps) => {
     const navigate = useNavigate();
     const setCommand = useSetCommand();
     const variant = /\.[^/]+$/.test(post.slug) ? 'file' : 'folder';
+    const label = variant === 'folder' ? `${post.slug} folder` : `${post.slug} file`;
 
     return (
         <motion.li variants={staggerItem}>
             <Crumb
                 name={post.slug}
                 variant={variant}
+                aria-label={label}
                 onClick={() => {
                     setCommand(variant === 'folder' ? `cd ${post.slug}/` : `cat ${post.slug}`);
                     navigate(`${base}/${post.slug}`)
@@ -51,6 +53,31 @@ const LinkEntry = ({ link }: LinkEntryProps) => {
     );
 }
 
+interface NavigateEntryProps {
+    name: string;
+    to: string;
+    label: string;
+}
+
+const NavigateEntry = ({ name, to, label }: NavigateEntryProps) => {
+    const navigate = useNavigate();
+    const setCommand = useSetCommand();
+
+    return (
+        <motion.li variants={staggerItem}>
+            <Crumb
+                name={name}
+                variant="folder"
+                aria-label={label}
+                onClick={() => {
+                    setCommand(`cd ${name}`)
+                    navigate(to)
+                }}
+            />
+        </motion.li>
+    );
+}
+
 interface NextPagesProps {
     open: boolean;
 }
@@ -58,8 +85,6 @@ interface NextPagesProps {
 export const NextPages = ({ open }: NextPagesProps) => {
     const { pathname } = useLocation();
     const matches = useMatches();
-    const setCommand = useSetCommand();
-    const navigate = useNavigate();
     const parentPath = pathname.split('/').slice(0, -1).join('/') || '/';
 
     const sectionMatch = [...matches]
@@ -82,27 +107,8 @@ export const NextPages = ({ open }: NextPagesProps) => {
             animate={open ? 'animate' : 'exit'}
         >
             <motion.ul className="pages" variants={staggerContainer}>
-                <motion.li variants={staggerItem}>
-                    <Crumb
-                        name="."
-                        variant="folder"
-                        onClick={() => {
-                            setCommand("cd .")
-                            navigate(pathname)
-                        }}
-                    />
-                </motion.li>
-                <motion.li variants={staggerItem}>
-                    <Crumb
-                        name=".."
-                        variant="folder"
-                        onClick={() => {
-                            setCommand("cd ..")
-                            navigate(parentPath)
-
-                        }}
-                    />
-                </motion.li>
+                <NavigateEntry name="." to={pathname} label="Current directory" />
+                <NavigateEntry name=".." to={parentPath} label="Back" />
 
                 {pages.map(page => <PageEntry key={page.slug} post={page} base={base} />)}
                 {links.map(link => <LinkEntry key={link.url} link={link} />)}

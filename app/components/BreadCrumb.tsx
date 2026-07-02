@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Crumb } from './Crumb';
-import type { CrumbData } from './Crumb';
+import type { CrumbProps } from './Crumb';
 
 import './BreadCrumb.css'
 
 interface BreadCrumbProps {
-    path: CrumbData[];
+    path: CrumbProps[];
     command: string
 }
 
@@ -56,10 +56,8 @@ export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
                     {path.map((crumb, i) => (
                         <Crumb
                             key={`${crumb.name}-${i}`}
-                            name={crumb.name}
-                            variant={crumb.variant}
-                            onClick={crumb.onClick}
                             current={i === path.length - 1}
+                            {...crumb}
                         />
                     ))}
                 </span>
