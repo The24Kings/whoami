@@ -11,38 +11,38 @@ interface BreadCrumbProps {
 
 export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
     const [displayedCommand, setDisplayedCommand] = useState('');
-    const [isTyping, setIsTyping] = useState(false);
-    const [showCursor, setShowCursor] = useState(true);
+    const [prevCommand, setPrevCommand] = useState(command);
+    const [blink, setBlink] = useState(true);
 
     const typingSpeed = 35;
+    const isTyping = displayedCommand !== command;
+    const showCursor = isTyping || blink;
+
+    // Clear instantly whenever the command changes, so the previous command never lingers
+    // onscreen while waiting for the typing effect's startTimeout to kick in.
+    if (command !== prevCommand) {
+        setPrevCommand(command);
+        setDisplayedCommand('');
+    }
 
     // Typing animation for the command
     useEffect(() => {
-        setIsTyping(true);
+        if (command === '') return;
 
         const animate = (index: number) => {
             setDisplayedCommand(command.slice(0, index));
             if (index <= command.length) setTimeout(() => animate(index + 1), typingSpeed);
-            if (index > command.length) setIsTyping(false);
         };
 
-        // Let the breadcrumb paint before the very first command types out
         const startTimeout = setTimeout(() => animate(0), 50);
-
         return () => clearTimeout(startTimeout);
     }, [command]);
 
     // Blinking Cursor
     useEffect(() => {
-        if (isTyping) {
-            setShowCursor(true);
-            return;
-        }
+        if (isTyping) return;
 
-        const interval = setInterval(() => {
-            setShowCursor(prev => !prev);
-        }, 500);
-
+        const interval = setInterval(() => setBlink(prev => !prev), 500);
         return () => clearInterval(interval);
     }, [isTyping]);
 

@@ -1,5 +1,5 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { MotionConfig } from 'motion/react';
 import { BreadCrumb, NextPages } from './components';
@@ -35,14 +35,17 @@ export default function SiteContainer({ children }: { children?: ReactNode }) {
     const [focused, setFocused] = useState(false);
     const showNav = hovering || focused;
 
-    useEffect(() => {
-        setCommand(showNav ? 'ls -a' : '');
-    }, [showNav]);
+    const setNavOpen = (open: boolean) => setCommand(open ? 'ls -a' : '');
 
     const handleBlur = (e: React.FocusEvent<HTMLElement>) => {
-        // ignore focus moving between elements still inside the header
         if (e.currentTarget.contains(e.relatedTarget as Node | null)) return;
         setFocused(false);
+        setNavOpen(hovering);
+    };
+
+    const handleFocus = () => {
+        if (!focused) setNavOpen(true);
+        setFocused(true);
     };
 
     return (
@@ -51,9 +54,9 @@ export default function SiteContainer({ children }: { children?: ReactNode }) {
                 <a className="skip-link" href="#main-content">Skip to main content</a>
                 <header
                     id="top-bar"
-                    onMouseEnter={() => setHovering(true)}
-                    onMouseLeave={() => { setHovering(false); setFocused(false); }}
-                    onFocus={() => setFocused(true)}
+                    onMouseEnter={() => { setHovering(true); setNavOpen(true); }}
+                    onMouseLeave={() => { setHovering(false); setFocused(false); setNavOpen(false); }}
+                    onFocus={handleFocus}
                     onBlur={handleBlur}
                 >
                     <BreadCrumb path={useCwdPath(setCommand)} command={command} />
