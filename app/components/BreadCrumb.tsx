@@ -9,17 +9,37 @@ interface BreadCrumbProps {
     command: string
 }
 
+// Types out `command` character-by-character, calling `onTick` after each step.
+function animate(command: string, onTick: (text: string) => void) {
+    const delay = 50;
+    const speed = 35;
+
+    let index = 0;
+    let intervalId: ReturnType<typeof setInterval>;
+
+    const startTimeout = setTimeout(() => {
+        intervalId = setInterval(() => {
+            index += 1;
+            onTick(command.slice(0, index));
+            if (index >= command.length) clearInterval(intervalId);
+        }, speed);
+    }, delay);
+
+    return () => {
+        clearTimeout(startTimeout);
+        clearInterval(intervalId);
+    };
+}
+
 export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
     const [displayedCommand, setDisplayedCommand] = useState('');
     const [prevCommand, setPrevCommand] = useState(command);
     const [blink, setBlink] = useState(true);
 
-    const typingSpeed = 35;
     const isTyping = displayedCommand !== command;
     const showCursor = isTyping || blink;
 
-    // Clear instantly whenever the command changes, so the previous command never lingers
-    // onscreen while waiting for the typing effect's startTimeout to kick in.
+    // Clear instantly whenever the command changes
     if (command !== prevCommand) {
         setPrevCommand(command);
         setDisplayedCommand('');
@@ -29,13 +49,7 @@ export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
     useEffect(() => {
         if (command === '') return;
 
-        const animate = (index: number) => {
-            setDisplayedCommand(command.slice(0, index));
-            if (index <= command.length) setTimeout(() => animate(index + 1), typingSpeed);
-        };
-
-        const startTimeout = setTimeout(() => animate(0), 50);
-        return () => clearTimeout(startTimeout);
+        return animate(command, setDisplayedCommand);
     }, [command]);
 
     // Blinking Cursor
@@ -62,8 +76,8 @@ export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
                     ))}
                 </span>
                 <span className="separator">{'> '}</span>
-                <span className="cmd">{displayedCommand}</span>
-                <span className="cursor" aria-hidden="true">{showCursor ? "█" : ""}</span>
+                <span className="cmd"><bdi>{displayedCommand}</bdi></span>
+                <span className={`cursor${showCursor ? ' is-visible' : ''}`} aria-hidden="true">█</span>
             </div>
         </div>
     );

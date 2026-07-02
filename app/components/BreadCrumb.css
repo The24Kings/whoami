@@ -3,12 +3,25 @@
     font-size: 14px;
     padding: 10px 16px;
     background: var(--cli-bg);
+    /* Never let the prompt bleed into a page-level horizontal scrollbar */
+    overflow-x: hidden;
 }
 
 .prompt {
     display: flex;
     align-items: center;
     user-select: none;
+}
+
+/* Only the command should ever shrink/truncate; every other segment keeps
+   its natural size so it can never get squeezed into wrapping. */
+.prompt .user,
+.prompt .cli-separator,
+.prompt .hostname,
+.prompt .cwd,
+.prompt .separator,
+.prompt .cursor {
+    flex-shrink: 0;
 }
 
 /* user */
@@ -32,6 +45,7 @@
 .prompt .cwd {
     color: var(--cli-path);
     margin-left: 1ch;
+    white-space: nowrap;
 }
 
 .prompt .separator {
@@ -41,4 +55,26 @@
 /* command */
 .prompt .cmd {
     color: var(--cli-cmd);
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    direction: rtl;
+    text-align: left;
+}
+
+.prompt .cursor {
+    display: inline-block;
+    width: 1ch;
+    visibility: hidden;
+}
+
+.prompt .cursor.is-visible {
+    visibility: visible;
+}
+
+@media (max-width: 768px) {
+    .prompt .cwd>span:not(:first-child) {
+        display: none;
+    }
 }
