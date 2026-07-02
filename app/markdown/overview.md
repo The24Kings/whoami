@@ -1,5 +1,5 @@
 ---
-image: article/me.jpg
+image: /article/me.jpg
 title: Project Overview
 date: 2025-05-24
 tags: [Rust, TypeScript, Minecraft, C++, TCP/IP]
