@@ -1,7 +1,7 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration } from 'react-router';
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { AnimatePresence, MotionConfig } from 'motion/react';
+import { MotionConfig } from 'motion/react';
 import { BreadCrumb, NextPages } from './components';
 import { CommandContext } from './context';
 import { useCwdPath } from './lib';
@@ -57,12 +57,11 @@ export default function SiteContainer({ children }: { children?: ReactNode }) {
                     onBlur={handleBlur}
                 >
                     <BreadCrumb path={useCwdPath(setCommand)} command={command} />
-                    <AnimatePresence>
-                        {showNav && <NextPages />}
-                    </AnimatePresence>
+                    <NextPages open={showNav} />
                 </header>
 
-                <main id="main-content" tabIndex={-1}>
+                {/* Made inert while the nav panel is open so content it visually covers can't be focused or clicked */}
+                <main id="main-content" tabIndex={-1} inert={showNav}>
                     {children ?? <Outlet />}
                 </main>
             </CommandContext.Provider>

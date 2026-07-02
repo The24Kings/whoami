@@ -51,7 +51,11 @@ const LinkEntry = ({ link }: LinkEntryProps) => {
     );
 }
 
-export const NextPages = () => {
+interface NextPagesProps {
+    open: boolean;
+}
+
+export const NextPages = ({ open }: NextPagesProps) => {
     const { pathname } = useLocation();
     const matches = useMatches();
     const setCommand = useSetCommand();
@@ -71,11 +75,11 @@ export const NextPages = () => {
     return (
         <motion.nav
             id="navigation"
+            role="navigation"
             aria-label="Directory contents"
             variants={slideDown}
-            initial="initial"
-            animate="animate"
-            exit="exit"
+            initial="exit"
+            animate={open ? 'animate' : 'exit'}
         >
             <motion.ul className="pages" variants={staggerContainer}>
                 <motion.li variants={staggerItem}>

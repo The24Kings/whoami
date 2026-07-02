@@ -47,7 +47,7 @@ export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
     }, [isTyping]);
 
     return (
-        <nav id="navbar" aria-label="Breadcrumb">
+        <div id="navbar" role="group" aria-label="Breadcrumb">
             <div className="prompt" >
                 <span className="user">portfolio</span>
                 <span className="cli-separator">@</span>
@@ -67,6 +67,6 @@ export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
                 <span className="cmd">{displayedCommand}</span>
                 <span className="cursor" aria-hidden="true">{showCursor ? "█" : ""}</span>
             </div>
-        </nav>
+        </div>
     );
 };

@@ -14,7 +14,7 @@ export const Article = ({ children }: ArticleProps) => {
         <motion.div
             className="post"
             variants={fadeIn}
-            initial="initial"
+            initial={false}
             animate="animate"
         >
             <article id="md-content">{children}</article>
