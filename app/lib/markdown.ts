@@ -50,7 +50,7 @@ export const md = MarkdownIt({
     .use(anchor, {
         permalink: anchor.permalink.linkInsideHeader({
             symbol: '#',
-            placement: 'before',
+            placement: 'after',
         }),
     });
 

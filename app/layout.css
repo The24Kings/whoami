@@ -4,10 +4,6 @@
     z-index: 10;
 }
 
-#main-content {
-    scroll-margin-top: 3.5rem;
-}
-
 #main-content:focus {
     outline: none;
 }

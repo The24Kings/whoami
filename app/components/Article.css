@@ -3,6 +3,10 @@
     padding: 8px 32px;
 }
 
+.post #md-content>:first-child {
+    margin-top: 0;
+}
+
 /* VS Code editor panel appearance for project posts */
 .post {
     background: var(--color-panel-card);
@@ -24,7 +28,7 @@
 .post h6 {
     position: relative;
     font-weight: 600;
-    scroll-margin-top: 4rem;
+    scroll-margin-top: 3rem;
 }
 
 .post .subtext {
@@ -38,7 +42,7 @@
 .post .header-anchor {
     position: absolute;
     font-size: 1.75rem;
-    left: -0.8em;
+    right: 0em;
     opacity: 0;
     text-decoration: none;
     color: var(--color-muted-text);
@@ -55,8 +59,7 @@
 }
 
 .post h1 {
-    padding-bottom: 28px;
-    margin-bottom: 24px;
+    padding-bottom: 12px;
 }
 
 .post h2 {
@@ -223,4 +226,15 @@ html:has(.post .expandable-img-overlay:target) {
 
 .post .markdown-alert-caution .markdown-alert-title {
     color: var(--alert-caution);
+}
+
+@media (max-width: 768px) {
+    .post {
+        padding: 8px 12px;
+    }
+
+    .post blockquote,
+    .post .markdown-alert {
+        margin-right: 0;
+    }
 }
