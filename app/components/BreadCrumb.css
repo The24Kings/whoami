@@ -1,7 +1,7 @@
 #navbar {
     font-family: var(--mono);
     font-size: 14px;
-    padding: 10px 16px;
+    padding: 24px 16px;
     background: var(--cli-bg);
     /* Never let the prompt bleed into a page-level horizontal scrollbar */
     overflow-x: hidden;
