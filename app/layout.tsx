@@ -37,6 +37,12 @@ export default function SiteContainer({ children }: { children?: ReactNode }) {
 
     const setNavOpen = (open: boolean) => setCommand(open ? 'ls -a' : '');
 
+    const closeNav = () => {
+        setHovering(false);
+        setFocused(false);
+        setNavOpen(false);
+    };
+
     const handleBlur = (e: React.FocusEvent<HTMLElement>) => {
         if (e.currentTarget.contains(e.relatedTarget as Node | null)) return;
         setFocused(false);
@@ -63,8 +69,9 @@ export default function SiteContainer({ children }: { children?: ReactNode }) {
                     <NextPages open={showNav} />
                 </header>
 
-                {/* Made inert while the nav panel is open so content it visually covers can't be focused or clicked */}
-                <main id="main-content" tabIndex={-1} inert={showNav}>
+                {showNav && (<div className="nav-backdrop" aria-hidden="true" onPointerDown={closeNav} />)}
+
+                <main id="main-content" tabIndex={-1}>
                     {children ?? <Outlet />}
                 </main>
             </CommandContext.Provider>

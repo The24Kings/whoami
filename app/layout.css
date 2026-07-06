@@ -4,6 +4,12 @@
     z-index: 10;
 }
 
+.nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+}
+
 #main-content:focus {
     outline: none;
 }
