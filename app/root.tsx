@@ -1,5 +1,4 @@
 import { isRouteErrorResponse, useRouteError } from 'react-router';
-import type { MetaFunction } from 'react-router';
 import SiteContainer from './layout';
 import type { SectionData } from './types';
 import { Article } from './components';
@@ -7,23 +6,6 @@ import { Article } from './components';
 export { Layout } from './layout'; // Re-export for react-router
 
 import './index.css';
-
-export const meta: MetaFunction = () => [
-    { title: 'The24Kings@portfolio' },
-    {
-        name: 'description',
-        content: 'Portfolio website by The24Kings showcasing projects and writing.',
-    },
-    { property: 'og:title', content: 'The24Kings@portfolio' },
-    {
-        property: 'og:description',
-        content: 'Portfolio website by The24Kings showcasing projects and writing.',
-    },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:site_name', content: 'The24Kings@portfolio' },
-    { name: 'twitter:card', content: 'summary' },
-    { name: 'theme-color', content: '#007acc' }, // Discord embed color
-];
 
 function loadSite(): SectionData {
     return {
