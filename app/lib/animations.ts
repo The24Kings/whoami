@@ -8,9 +8,9 @@ export const easeOut: Transition = {
 
 /** Slide-down + fade for the NextPages navigation panel. */
 export const slideDown: Variants = {
-    initial: { opacity: 0, y: -12 },
+    initial: { opacity: 0, y: -45 },
     animate: { opacity: 1, y: 0, transition: easeOut },
-    exit: { opacity: 0, y: -12, transition: { duration: 0.18, ease: 'easeIn' } },
+    exit: { opacity: 0, y: -45, transition: { duration: 0.18, ease: 'easeIn' } },
 };
 
 /** Container that staggers its motion children as they enter. */
