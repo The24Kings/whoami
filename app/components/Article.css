@@ -32,7 +32,17 @@
 }
 
 .post .subtext {
-    color: var(--text-sh)
+    color: var(--color-muted-text)
+}
+
+.post .subtext-caption {
+    margin-top: 0;
+    display: block;
+    text-align: center;
+}
+
+.post p:has(+ .subtext-caption) {
+    margin-bottom: 0;
 }
 
 .post [id^="fnref"] {
