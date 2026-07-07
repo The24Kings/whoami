@@ -10,7 +10,7 @@ import type { ReactNode } from 'react';
 
 import { subtext, expandableImage } from '../plugins';
 
-import 'highlight.js/styles/atom-one-dark.css';
+import './hljs-theme.css';
 
 const languageAliases: Record<string, string> = {
     'c#': 'csharp',

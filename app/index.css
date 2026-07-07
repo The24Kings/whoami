@@ -13,7 +13,6 @@
 
   --text: var(--color-primary-text);
   --text-h: var(--color-primary-text);
-  --text-sh: var(--color-muted-text);
   --bg: var(--color-background);
   --border: var(--color-border);
   --code-bg: var(--color-raised-surface);
@@ -24,13 +23,13 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --cli-bg: #0c0c0c;
-  --cli-border: #333333;
-  --cli-user: #4ec9b0;
-  --cli-host: #d4d4d4;
-  --cli-separator: #858585;
-  --cli-path: #569cd6;
-  --cli-cmd: #d4d4d4;
+  --cli-bg: #e8e8ec;
+  --cli-border: #d4d4d4;
+  --cli-user: #267f99;
+  --cli-host: #1e1e1e;
+  --cli-separator: #6a6a6a;
+  --cli-path: #0451a5;
+  --cli-cmd: #1e1e1e;
 
   --alert-note: #1f6feb;
   --alert-note-bg: rgba(31, 111, 235, 0.1);
@@ -67,7 +66,7 @@
     --color-raised-surface: #2d2d30;
     --color-border: #4d4d4d;
     --color-primary-text: #d4d4d4;
-    --color-muted-text: #858585;
+    --color-muted-text: #969696;
     --color-accent-blue: #007acc;
     --color-folder-blue: #569cd6;
     --color-file-text: #9cdcfe;
