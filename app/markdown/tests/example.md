@@ -681,3 +681,77 @@ Underscores
 ```
 
 [![IMAGE ALT TEXT HERE](https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/YouTube_logo_2015.svg/1200px-YouTube_logo_2015.svg.png)](https://www.youtube.com/watch?v=ciawICBvQoE)
+
+------
+
+# [Math (TeX)](https://mdit-plugins.github.io/tex.html)
+
+Rendered with [@mdit/plugin-katex](https://mdit-plugins.github.io/katex.html).
+
+```
+Inline math uses single dollars: Euler's identity $e^{i\pi}+1=0$ is a beautiful formula in $\mathbb{R}^2$.
+
+Display math uses double dollars:
+
+$$
+\frac {\partial^r} {\partial \omega^r} \left(\frac {y^{\omega}} {\omega}\right)
+= \left(\frac {y^{\omega}} {\omega}\right) \left\{(\log y)^r + \sum_{i=1}^r \frac {(-1)^ Ir \cdots (r-i+1) (\log y)^{ri}} {\omega^i} \right\}
+$$
+
+Fractions, sums, and limits:
+
+$$
+\sum_{i=1}^n i \quad \prod_{i=1}^n i \quad \lim_{x \to \infty} \frac{1}{x}
+$$
+
+Matrices:
+
+$$
+\begin{pmatrix} a & b \\ c & d \end{pmatrix}
+\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+$$
+
+Aligned equations:
+
+$$
+\begin{aligned}
+x &= a+b+c \\
+y &= d+e+f
+\end{aligned}
+$$
+
+Escaping still works: The $a=1$ is a TeX equation, while \$a=1$ is not.
+```
+
+Inline math uses single dollars: Euler's identity $e^{i\pi}+1=0$ is a beautiful formula in $\mathbb{R}^2$.
+
+Display math uses double dollars:
+
+$$
+\frac {\partial^r} {\partial \omega^r} \left(\frac {y^{\omega}} {\omega}\right)
+= \left(\frac {y^{\omega}} {\omega}\right) \left\{(\log y)^r + \sum_{i=1}^r \frac {(-1)^ Ir \cdots (r-i+1) (\log y)^{ri}} {\omega^i} \right\}
+$$
+
+Fractions, sums, and limits:
+
+$$
+\sum_{i=1}^n i \quad \prod_{i=1}^n i \quad \lim_{x \to \infty} \frac{1}{x}
+$$
+
+Matrices:
+
+$$
+\begin{pmatrix} a & b \\ c & d \end{pmatrix}
+\begin{bmatrix} a & b \\ c & d \end{bmatrix}
+$$
+
+Aligned equations:
+
+$$
+\begin{aligned}
+x &= a+b+c \\
+y &= d+e+f
+\end{aligned}
+$$
+
+Escaping still works: The $a=1$ is a TeX equation, while \$a=1$ is not.

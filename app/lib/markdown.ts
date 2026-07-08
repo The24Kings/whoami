@@ -4,6 +4,7 @@ import MarkdownItGithubAlerts from 'markdown-it-github-alerts';
 import MarkdownItTaskLists from 'markdown-it-task-lists';
 import MarkdownItLinkAttributes from 'markdown-it-link-attributes';
 import anchor from 'markdown-it-anchor';
+import { katex } from '@mdit/plugin-katex';
 import hljs from 'highlight.js';
 import parse from 'html-react-parser';
 import type { ReactNode } from 'react';
@@ -11,6 +12,7 @@ import type { ReactNode } from 'react';
 import { subtext, expandableImage } from '../plugins';
 
 import './hljs-theme.css';
+import 'katex/dist/katex.min.css';
 
 const languageAliases: Record<string, string> = {
     'c#': 'csharp',
@@ -47,6 +49,7 @@ export const md = MarkdownIt({
     })
     .use(subtext)
     .use(expandableImage)
+    .use(katex)
     .use(anchor, {
         permalink: anchor.permalink.linkInsideHeader({
             symbol: '#',
