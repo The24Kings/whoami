@@ -9,7 +9,7 @@ import hljs from 'highlight.js';
 import parse from 'html-react-parser';
 import type { ReactNode } from 'react';
 
-import { subtext, expandableImage } from '../plugins';
+import { subtext, expandableImage, relativeLinks } from '../plugins';
 
 import './hljs-theme.css';
 import 'katex/dist/katex.min.css';
@@ -47,6 +47,7 @@ export const md = MarkdownIt({
         matcher: (href: string) => /^https?:\/\//.test(href),
         attrs: { target: '_blank', rel: 'noopener noreferrer' },
     })
+    .use(relativeLinks)
     .use(subtext)
     .use(expandableImage)
     .use(katex)
