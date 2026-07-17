@@ -1,5 +1,5 @@
 ---
-image: 
+image:
 title: Smashing the Stack
 date: 01/02/24
 tags: [C, Cybersecurity, Debugging]

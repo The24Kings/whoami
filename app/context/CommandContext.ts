@@ -1,11 +1,16 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext } from "react";
 
-export const CommandContext = createContext<((cmd: string) => void) | null>(null);
+export const CommandContext = createContext<((cmd: string) => void) | null>(
+  null,
+);
 
 export function useSetCommand() {
-    const set = useContext(CommandContext);
-    if (!set) throw new Error('useSetCommand must be used inside CommandContext.Provider');
-    return set;
+  const set = useContext(CommandContext);
+  if (!set)
+    throw new Error(
+      "useSetCommand must be used inside CommandContext.Provider",
+    );
+  return set;
 }
 
-export default CommandContext
+export default CommandContext;

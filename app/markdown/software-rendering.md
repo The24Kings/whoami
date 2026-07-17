@@ -42,7 +42,7 @@ pub fn ortho(&self) -> Point2D {
 - Convert point coordinate to screen coordinate
   - You need to map it the size of your drawn screen since a point is `-1..1` after our formula
   - This works because our canvas is already has the origin in the center of the screen. Other maths
-  would need to be applied if this was top-left origin
+    would need to be applied if this was top-left origin
 
 ```RUST
 pub fn screen(&self) -> Point2D {

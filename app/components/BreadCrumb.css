@@ -1,18 +1,18 @@
 #navbar {
-    position: relative;
-    z-index: 10;
-    font-family: var(--mono);
-    font-size: 14px;
-    padding: 24px 16px;
-    background: var(--cli-bg);
-    /* Never let the prompt bleed into a page-level horizontal scrollbar */
-    overflow-x: hidden;
+  position: relative;
+  z-index: 10;
+  font-family: var(--mono);
+  font-size: 14px;
+  padding: 24px 16px;
+  background: var(--cli-bg);
+  /* Never let the prompt bleed into a page-level horizontal scrollbar */
+  overflow-x: hidden;
 }
 
 .prompt {
-    display: flex;
-    align-items: center;
-    user-select: none;
+  display: flex;
+  align-items: center;
+  user-select: none;
 }
 
 /* Only the command should ever shrink/truncate; every other segment keeps
@@ -23,60 +23,60 @@
 .prompt .cwd,
 .prompt .separator,
 .prompt .cursor {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
 /* user */
 .prompt .user {
-    color: var(--cli-user);
-    font-weight: bold;
+  color: var(--cli-user);
+  font-weight: bold;
 }
 
 /* @ */
 .prompt .cli-separator {
-    color: var(--cli-separator);
+  color: var(--cli-separator);
 }
 
 /* hostname */
 .prompt .hostname {
-    color: var(--cli-host);
-    font-weight: bold;
+  color: var(--cli-host);
+  font-weight: bold;
 }
 
 /* :/path/> */
 .prompt .cwd {
-    color: var(--cli-path);
-    margin-left: 1ch;
-    white-space: nowrap;
+  color: var(--cli-path);
+  margin-left: 1ch;
+  white-space: nowrap;
 }
 
 .prompt .separator {
-    margin-right: 1ch;
+  margin-right: 1ch;
 }
 
 /* command */
 .prompt .cmd {
-    color: var(--cli-cmd);
-    flex-shrink: 1;
-    min-width: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    direction: rtl;
-    text-align: left;
+  color: var(--cli-cmd);
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  direction: rtl;
+  text-align: left;
 }
 
 .prompt .cursor {
-    display: inline-block;
-    width: 1ch;
-    visibility: hidden;
+  display: inline-block;
+  width: 1ch;
+  visibility: hidden;
 }
 
 .prompt .cursor.is-visible {
-    visibility: visible;
+  visibility: visible;
 }
 
 @media (max-width: 768px) {
-    .prompt .cwd>span:not(:first-child) {
-        display: none;
-    }
+  .prompt .cwd > span:not(:first-child) {
+    display: none;
+  }
 }

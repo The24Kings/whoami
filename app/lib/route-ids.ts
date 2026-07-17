@@ -6,6 +6,6 @@
  * option, so moving the route files around never changes these IDs.
  */
 export const RouteId = {
-    root: 'root',
-    projects: 'projects',
+  root: "root",
+  projects: "projects",
 } as const;
