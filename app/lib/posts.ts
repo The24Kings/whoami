@@ -1,17 +1,6 @@
 import type { MetaDescriptor } from "react-router";
-import type { PostResp, SectionData } from "../types";
 
-/** Normalize the result of an `import.meta.glob` markdown import into PostResp[] */
-export function normalizePosts(
-  modules: Record<string, Omit<PostResp, "slug">>,
-  stripPrefix: string,
-): PostResp[] {
-  return Object.entries(modules).map(([path, data]) => ({
-    slug: path.replace(stripPrefix, ""),
-    ...data,
-    metadata: { tags: [], ...data.metadata },
-  }));
-}
+import type { PostResp, SectionData } from "../types";
 
 /** Runtime guard for loader data shaped like SectionData. */
 export function isSectionData(data: unknown): data is SectionData {

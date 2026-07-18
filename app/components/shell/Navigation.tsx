@@ -1,17 +1,17 @@
 import { motion } from "motion/react";
-import { useLocation, useMatches, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
-import { useSetCommand } from "../context";
-import { Crumb } from "./Crumb";
+import { useCommandContext } from "../../lib";
+import { BreadCrumb } from "./BreadCrumb";
 import {
-  isSectionData,
   slideDown,
   staggerContainer,
   staggerItem,
-} from "../lib";
-import type { ExternalLink, PostResp, SectionData } from "../types";
+  type DirectoryNavigation,
+} from "../../lib";
+import type { ExternalLink, PostResp } from "../../types";
 
-import "./NextPages.css";
+import "./Navigation.css";
 
 interface PageEntryProps {
   post: PostResp;
@@ -20,14 +20,14 @@ interface PageEntryProps {
 
 const PageEntry = ({ post, base }: PageEntryProps) => {
   const navigate = useNavigate();
-  const setCommand = useSetCommand();
+  const setCommand = useCommandContext();
   const variant = /\.[^/]+$/.test(post.slug) ? "file" : "folder";
   const label =
     variant === "folder" ? `${post.slug} folder` : `${post.slug} file`;
 
   return (
     <motion.li variants={staggerItem}>
-      <Crumb
+      <BreadCrumb
         name={post.slug}
         variant={variant}
         aria-label={label}
@@ -70,11 +70,11 @@ interface NavigateEntryProps {
 
 const NavigateEntry = ({ name, to, label }: NavigateEntryProps) => {
   const navigate = useNavigate();
-  const setCommand = useSetCommand();
+  const setCommand = useCommandContext();
 
   return (
     <motion.li variants={staggerItem}>
-      <Crumb
+      <BreadCrumb
         name={name}
         variant="folder"
         aria-label={label}
@@ -87,28 +87,21 @@ const NavigateEntry = ({ name, to, label }: NavigateEntryProps) => {
   );
 };
 
-interface NextPagesProps {
+interface NavigationProps {
   open: boolean;
+  directory: DirectoryNavigation;
 }
 
-export const NextPages = ({ open }: NextPagesProps) => {
+export const Navigation = ({ open, directory }: NavigationProps) => {
   const { pathname } = useLocation();
-  const matches = useMatches();
-  const parentPath = pathname.split("/").slice(0, -1).join("/") || "/";
+  const { base, pages, links } = directory;
 
-  const sectionMatch = [...matches]
-    .reverse()
-    .find((m) => isSectionData(m.loaderData));
+  function parentDir(path: string) {
+    const parts = path.split("/");
+    const parent = parts.slice(0, -1).join("/");
 
-  const sectionData =
-    sectionMatch?.pathname === pathname
-      ? (sectionMatch.loaderData as SectionData)
-      : null;
-
-  const pages = sectionData?.pages ?? [];
-  const links = sectionData?.links ?? [];
-  const base =
-    sectionMatch?.pathname === "/" ? "" : (sectionMatch?.pathname ?? "");
+    return parent === "" ? "/" : parent;
+  }
 
   return (
     <motion.nav
@@ -121,7 +114,7 @@ export const NextPages = ({ open }: NextPagesProps) => {
     >
       <motion.ul className="pages" variants={staggerContainer} inert={!open}>
         <NavigateEntry name="." to={pathname} label="Current directory" />
-        <NavigateEntry name=".." to={parentPath} label="Back" />
+        <NavigateEntry name=".." to={parentDir(pathname)} label="Back" />
 
         {pages.map((page) => (
           <PageEntry key={page.slug} post={page} base={base} />

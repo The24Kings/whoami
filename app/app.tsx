@@ -1,36 +1,13 @@
-import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "react-router";
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { MotionConfig } from "motion/react";
 
-import { BreadCrumb, NextPages } from "./components";
-import { CommandContext } from "./context";
-import { useCwdPath } from "./lib";
+import { CommandLine, Navigation } from "./components";
+import { useCwdPath, useDirectoryNavigation, CommandContext } from "./lib";
 
-import "./layout.css";
-
-/** THe base of the app that ultimately loads everything */
-export function Layout({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="UTF-8" />
-        <link rel="icon" type="image/jpeg" href="/vash.jpg" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <div id="root">{children}</div>
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
-/** Navigation and container around site content */
-export default function SiteContainer({ children }: { children?: ReactNode }) {
+/** Persistent navigation and main-content frame for every route. */
+export default function App({ children }: { children: ReactNode }) {
+  const directoryNavigation = useDirectoryNavigation();
   const [command, setCommand] = useState("echo welcome");
   const [hovering, setHovering] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -44,8 +21,7 @@ export default function SiteContainer({ children }: { children?: ReactNode }) {
     setNavOpen(false);
   };
 
-  const handleBlur = (e: React.FocusEvent<HTMLElement>) => {
-    if (e.currentTarget.contains(e.relatedTarget as Node | null)) return;
+  const handleBlur = () => {
     setFocused(false);
     setNavOpen(hovering);
   };
@@ -75,8 +51,8 @@ export default function SiteContainer({ children }: { children?: ReactNode }) {
           onFocus={handleFocus}
           onBlur={handleBlur}
         >
-          <BreadCrumb path={useCwdPath(setCommand)} command={command} />
-          <NextPages open={showNav} />
+          <CommandLine path={useCwdPath(setCommand)} command={command} />
+          <Navigation open={showNav} directory={directoryNavigation} />
         </header>
 
         {showNav && (
@@ -88,7 +64,7 @@ export default function SiteContainer({ children }: { children?: ReactNode }) {
         )}
 
         <main id="main-content" tabIndex={-1}>
-          {children ?? <Outlet />}
+          {children}
         </main>
       </CommandContext.Provider>
     </MotionConfig>

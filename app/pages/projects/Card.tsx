@@ -1,9 +1,9 @@
 import React from "react";
 import { motion } from "motion/react";
 
-import type { PostMetadata } from "../types";
-import { hoverScale, tapScale, useTagFilter } from "../lib";
-import { useSetCommand } from "../context";
+import type { PostMetadata } from "../../types";
+import { hoverScale, tapScale, useTagFilter } from "../../lib";
+import { useCommandContext } from "../../lib";
 
 import "./Card.css";
 
@@ -25,7 +25,7 @@ function stopPointerPropagation(el: HTMLButtonElement | null) {
 
 export const Card = ({ info, onClick }: CardProps) => {
   const { active, toggleTag } = useTagFilter();
-  const setCommand = useSetCommand();
+  const setCommand = useCommandContext();
   const date = info.date?.split("T")[0];
   const src = info.image?.trim();
 

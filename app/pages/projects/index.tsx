@@ -1,19 +1,19 @@
 import { useNavigate, useRouteLoaderData } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 
-import { Card } from "../../components";
-import { useSetCommand } from "../../context";
-import { fadeIn, isSectionData, useTagFilter, RouteId } from "../../lib";
+import { Card } from "./Card";
+import { fadeIn, useTagFilter, useCommandContext, RouteId } from "../../lib";
+import type { SectionData } from "../../types";
 
 import "./projects.css";
 
 export default function Projects() {
-  const data = useRouteLoaderData(RouteId.projects);
-  const posts = isSectionData(data) ? data.pages : [];
+  const data = useRouteLoaderData<SectionData>(RouteId.projects);
   const navigate = useNavigate();
-  const setCommand = useSetCommand();
+  const setCommand = useCommandContext();
   const { active } = useTagFilter();
 
+  const posts = data?.pages ?? [];
   const sorted = [...posts].sort(
     (a, b) =>
       new Date(b.metadata.date).getTime() - new Date(a.metadata.date).getTime(),

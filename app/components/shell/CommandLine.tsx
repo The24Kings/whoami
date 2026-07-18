@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { Crumb } from "./Crumb";
-import type { CrumbProps } from "./Crumb";
+import { BreadCrumb } from "./BreadCrumb";
+import type { CrumbProps } from "./BreadCrumb";
 
-import "./BreadCrumb.css";
+import "./CommandLine.css";
 
-interface BreadCrumbProps {
+interface CommandLineProps {
   path: CrumbProps[];
   command: string;
 }
@@ -32,7 +32,7 @@ function animate(command: string, onTick: (text: string) => void) {
   };
 }
 
-export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
+export const CommandLine = ({ path, command }: CommandLineProps) => {
   const [displayedCommand, setDisplayedCommand] = useState("");
   const [prevCommand, setPrevCommand] = useState(command);
   const [blink, setBlink] = useState(true);
@@ -69,7 +69,7 @@ export const BreadCrumb = ({ path, command }: BreadCrumbProps) => {
         <span className="hostname">navigator</span>
         <span className="cwd">
           {path.map((crumb, i) => (
-            <Crumb
+            <BreadCrumb
               key={`${crumb.name}-${i}`}
               current={i === path.length - 1}
               {...crumb}

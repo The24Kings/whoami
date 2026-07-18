@@ -1,10 +1,10 @@
-import { isRouteErrorResponse, useRouteError } from "react-router";
+import { isRouteErrorResponse, Outlet, useRouteError } from "react-router";
 
-import SiteContainer from "./layout";
+import App from "./app";
 import type { SectionData } from "./types";
 import { Article } from "./components";
 
-export { Layout } from "./layout"; // Re-export for react-router
+export { Layout } from "./document"; // Re-export for react-router
 
 import "./index.css";
 
@@ -47,11 +47,11 @@ export const loader = loadSite;
 export const clientLoader = loadSite;
 
 export default function Root() {
-  return <SiteContainer />;
-}
-
-export function HydrateFallback() {
-  return <SiteContainer />;
+  return (
+    <App>
+      <Outlet />
+    </App>
+  );
 }
 
 export function ErrorBoundary() {
@@ -68,7 +68,7 @@ export function ErrorBoundary() {
   }
 
   return (
-    <SiteContainer>
+    <App>
       <Article>
         <h1 className="error">{heading}</h1>
         <p>{message}</p>
@@ -76,6 +76,6 @@ export function ErrorBoundary() {
           <a href="/">Return home</a>
         </p>
       </Article>
-    </SiteContainer>
+    </App>
   );
 }
