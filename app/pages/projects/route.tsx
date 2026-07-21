@@ -1,19 +1,16 @@
 import { Outlet } from "react-router";
 import type { MetaFunction } from "react-router";
 
-import type { PostResp, SectionData } from "../../types";
-import { normalizePosts } from "../../lib";
+import type { SectionData } from "../../types";
+import { createProjectSection, type ProjectModule } from "../../lib";
 
 function loadProjects(): SectionData {
-  const posts = import.meta.glob<Omit<PostResp, "slug">>(
-    "../../markdown/*.md",
-    { eager: true, import: "default" },
-  );
+  const posts = import.meta.glob<ProjectModule>("/app/markdown/*.md", {
+    eager: true,
+    import: "default",
+  });
 
-  return {
-    pages: normalizePosts(posts, "../../markdown/"),
-    links: [],
-  };
+  return createProjectSection(posts);
 }
 
 // loader: runs at build time so prerendered pages get correct data + meta.
@@ -26,6 +23,7 @@ export const meta: MetaFunction = () => [
   { name: "description", content: "Projects by The24Kings." },
 ];
 
-export default function ProjectsLayout() {
+// Parent data route: child routes consume this loader through RouteId.projects.
+export default function ProjectsRoute() {
   return <Outlet />;
 }

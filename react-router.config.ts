@@ -1,16 +1,16 @@
 import type { Config } from "@react-router/dev/config";
 import { readdirSync } from "node:fs";
 
-const projectSlugs = readdirSync("app/markdown").filter((f) =>
-  f.endsWith(".md"),
-);
+import { isProjectMarkdownFile, projectPrerenderPaths } from "./app/lib";
+
+const projectSlugs = readdirSync("app/markdown").filter(isProjectMarkdownFile);
 
 export default {
   ssr: false,
   prerender: [
     "/",
     "/projects",
-    ...projectSlugs.map((s) => `/projects/${s}`),
+    ...projectPrerenderPaths(projectSlugs),
     "/about.md",
     "/contact.md",
   ],

@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from "react";
 
-import "./Crumb.css";
+import "./BreadCrumb.css";
 
 export type CrumbVariants = "folder" | "file";
 
@@ -10,7 +10,7 @@ export interface CrumbProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   current?: boolean;
 }
 
-export const Crumb = ({
+export const BreadCrumb = ({
   variant = "folder",
   name,
   current,

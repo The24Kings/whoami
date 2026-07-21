@@ -4,7 +4,7 @@ import { RouteId } from "./lib";
 
 export default [
   index("pages/root.tsx"),
-  route("projects", "pages/projects/layout.tsx", { id: RouteId.projects }, [
+  route("projects", "pages/projects/route.tsx", { id: RouteId.projects }, [
     index("pages/projects/index.tsx"),
     route(":slug", "pages/projects/post.tsx"),
   ]),
