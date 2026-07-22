@@ -36,6 +36,10 @@ function normalizePath(path: string): string {
   return path.replace(/\\/g, "/");
 }
 
+export function normalizeUrlPath(path: string): string {
+  return normalizePath(path).replace(/\/+$/, "") || "/";
+}
+
 /** Convert a Markdown module path into the slug used by the projects route. */
 function slug(path: string): string {
   return normalizePath(path).split("/").at(-1) ?? path; // Get just the file name from the path, ignoring directories.
