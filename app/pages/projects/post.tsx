@@ -2,12 +2,15 @@ import { Link, useParams, useRouteLoaderData } from "react-router";
 import type { MetaFunction } from "react-router";
 
 import { useMemo } from "react";
-import { Article } from "../../components";
-import { findPostBySlug, postMeta, renderMarkdown, RouteId } from "../../lib";
+import { Article } from "../../components/Article";
+import { RouteId } from "../../lib/site-catalog";
+import { findPageBySlug, genMetadata } from "../../lib/posts";
+import { renderMarkdown } from "../../lib/markdown";
 
 export const meta: MetaFunction = ({ params, matches }) => {
   const data = matches.find((m) => m.id === RouteId.projects)?.loaderData;
-  return postMeta(findPostBySlug(data, params.slug), "Post not found");
+  const metadata = findPageBySlug(data, params.slug)?.metadata;
+  return genMetadata(metadata, "Post not found");
 };
 
 function Error() {
@@ -24,7 +27,7 @@ function Error() {
 export default function Post() {
   const { slug } = useParams();
   const data = useRouteLoaderData(RouteId.projects);
-  const post = findPostBySlug(data, slug);
+  const post = findPageBySlug(data, slug);
   const content = useMemo(
     () => (post ? renderMarkdown(post.body) : null),
     [post],

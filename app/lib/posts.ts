@@ -1,6 +1,6 @@
 import type { MetaDescriptor } from "react-router";
 
-import type { PostResp, SectionData } from "../types";
+import type { PostMetadata, PostResp, SectionData } from "../types";
 
 /** Runtime guard for loader data shaped like SectionData. */
 export function isSectionData(data: unknown): data is SectionData {
@@ -12,8 +12,13 @@ export function isSectionData(data: unknown): data is SectionData {
   );
 }
 
+/** Read the section index content from possibly untyped loader data. */
+export function findSectionIndex(data: unknown): PostMetadata | undefined {
+  return isSectionData(data) ? data.index : undefined;
+}
+
 /** Find a post by slug within (possibly untyped) section loader data. */
-export function findPostBySlug(
+export function findPageBySlug(
   data: unknown,
   slug: string | undefined,
 ): PostResp | undefined {
@@ -22,13 +27,14 @@ export function findPostBySlug(
 }
 
 /** Build document <meta> for a post/page, falling back to a title when fields are missing. */
-export function postMeta(
-  post: PostResp | undefined,
-  fallbackTitle: string,
+export function genMetadata(
+  meta?: PostMetadata,
+  fallbackTitle = "",
+  type: "article" | "website" = "article",
 ): MetaDescriptor[] {
-  const title = post?.metadata.title?.trim() || fallbackTitle;
-  const desc = post?.metadata.desc?.trim();
-  const image = post?.metadata.image?.trim();
+  const title = meta?.title?.trim() || fallbackTitle;
+  const desc = meta?.desc?.trim();
+  const image = meta?.image?.trim();
 
   const description: MetaDescriptor[] = desc
     ? [
@@ -48,7 +54,10 @@ export function postMeta(
   return [
     { title: `${title} | The24Kings@portfolio` },
     { property: "og:title", content: title },
-    { property: "og:type", content: "article" },
+    { property: "og:type", content: type },
+    { property: "og:site_name", content: "The24Kings@portfolio" },
+    { name: "twitter:card", content: "summary" },
+    { name: "theme-color", content: "#007acc" }, // Discord embed color
     ...description,
     ...imageMeta,
   ];

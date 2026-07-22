@@ -2,49 +2,31 @@ import { isRouteErrorResponse, Outlet, useRouteError } from "react-router";
 
 import App from "./app";
 import type { SectionData } from "./types";
-import { Article } from "./components";
+import { Article } from "./components/Article";
+import { initSection, type RouteInfo } from "./lib/site-catalog";
 
 export { Layout } from "./document"; // Re-export for react-router
 
 import "./index.css";
 
-function loadSite(): SectionData {
-  return {
-    pages: [
-      {
-        slug: "projects",
-        metadata: { image: "", title: "Projects", date: "", desc: "" },
-        body: "",
-      },
-      {
-        slug: "about.md",
-        metadata: {
-          image: "",
-          title: "About",
-          date: "",
-          desc: "About The24Kings and this portfolio.",
-        },
-        body: "",
-      },
-      {
-        slug: "contact.md",
-        metadata: {
-          image: "",
-          title: "Contact",
-          date: "",
-          desc: "How to get in touch with The24Kings.",
-        },
-        body: "",
-      },
-    ],
-    links: [{ name: "github", url: "https://github.com/The24Kings" }],
-  };
+function loadRoutes(): SectionData {
+  const files = import.meta.glob<RouteInfo>("/app/markdown/*.md", {
+    eager: true,
+    import: "default",
+  });
+
+  const folders = import.meta.glob<RouteInfo>("/app/markdown/*/index.md", {
+    eager: true,
+    import: "default",
+  });
+
+  return initSection({ files, folders });
 }
 
 // loader: runs at build time so prerendered pages get correct data + meta.
 // clientLoader: runs in the browser so non-prerendered slugs resolve client-side.
-export const loader = loadSite;
-export const clientLoader = loadSite;
+export const loader = loadRoutes;
+export const clientLoader = loadRoutes;
 
 export default function Root() {
   return (

@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { motion } from "motion/react";
 
-import { fadeIn } from "../lib";
+import { fadeIn } from "../lib/animations";
 
 import "./Article.css";
 

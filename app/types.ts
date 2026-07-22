@@ -11,6 +11,7 @@ export type PostMetadata = {
   date: string;
   tags?: string[];
   desc: string;
+  links?: ExternalLink[];
 };
 
 export type ExternalLink = {
@@ -18,8 +19,9 @@ export type ExternalLink = {
   url: string;
 };
 
-// Defines the output of the `ls` command in NextPages
+// Used to build the section data consumed by the shell component
 export type SectionData = {
+  index?: PostMetadata; // Used for root index metadata and links
   pages: PostResp[];
   links: ExternalLink[];
 };

@@ -2,8 +2,11 @@ import { useNavigate, useRouteLoaderData } from "react-router";
 import { AnimatePresence, motion } from "motion/react";
 
 import { Card } from "./Card";
-import { fadeIn, useTagFilter, useCommandContext, RouteId } from "../../lib";
 import type { SectionData } from "../../types";
+import { RouteId } from "../../lib/site-catalog";
+import { useCommandContext } from "../../lib/useCommandContext";
+import { useTagFilter } from "../../lib/useTagFilter";
+import { fadeIn } from "../../lib/animations";
 
 import "./projects.css";
 
