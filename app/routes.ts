@@ -1,6 +1,6 @@
 import { type RouteConfig, route, index } from "@react-router/dev/routes";
 
-import { RouteId } from "./lib";
+import { RouteId } from "./lib/site-catalog";
 
 export default [
   index("pages/root.tsx"),

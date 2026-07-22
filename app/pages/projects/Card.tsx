@@ -2,8 +2,9 @@ import React from "react";
 import { motion } from "motion/react";
 
 import type { PostMetadata } from "../../types";
-import { hoverScale, tapScale, useTagFilter } from "../../lib";
-import { useCommandContext } from "../../lib";
+import { useTagFilter } from "../../lib/useTagFilter";
+import { useCommandContext } from "../../lib/useCommandContext";
+import { hoverScale, tapScale } from "../../lib/animations";
 
 import "./Card.css";
 

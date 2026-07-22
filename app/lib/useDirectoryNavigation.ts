@@ -1,7 +1,8 @@
-import { useLocation, useRouteLoaderData } from "react-router";
+import { useLocation, useMatches } from "react-router";
 
 import type { ExternalLink, PostResp, SectionData } from "../types";
-import { RouteId } from ".";
+import { isSectionData } from "./posts";
+import { normalizeUrlPath } from "./site-catalog";
 
 export type DirectoryNavigation = {
   base: string;
@@ -15,26 +16,29 @@ const EMPTY_DIRECTORY: DirectoryNavigation = {
   links: [],
 };
 
-function directoryNavigation(
-  base: string,
-  section: SectionData,
-): DirectoryNavigation {
-  return { base, pages: section.pages, links: section.links };
-}
-
 /** Resolve the dropdown contents for routes that represent directories. */
 export function useDirectoryNavigation(): DirectoryNavigation {
   const { pathname } = useLocation();
-  const rootDirectory = useRouteLoaderData<SectionData>(RouteId.root);
-  const projectsDirectory = useRouteLoaderData<SectionData>(RouteId.projects);
+  const sections = useMatches().filter((m) => isSectionData(m.loaderData));
 
-  if (pathname === "/" && rootDirectory) {
-    return directoryNavigation("", rootDirectory);
+  const currentSection = sections.at(-1);
+
+  if (!currentSection) {
+    return EMPTY_DIRECTORY;
   }
 
-  if (pathname === "/projects" && projectsDirectory) {
-    return directoryNavigation("/projects", projectsDirectory);
+  const currentPath = normalizeUrlPath(pathname);
+  const sectionPath = normalizeUrlPath(currentSection.pathname);
+
+  if (currentPath !== sectionPath) {
+    return EMPTY_DIRECTORY;
   }
 
-  return EMPTY_DIRECTORY;
+  const section = currentSection.loaderData as SectionData;
+
+  return {
+    base: sectionPath === "/" ? "" : sectionPath,
+    pages: section.pages,
+    links: section.links,
+  };
 }

@@ -1,23 +1,14 @@
 import type { MetaFunction } from "react-router";
 
-import { Article } from "../components";
+import { Article } from "../components/Article";
+import { findSectionIndex, genMetadata } from "../lib/posts";
+import { RouteId } from "../lib/site-catalog";
 
-export const meta: MetaFunction = () => [
-  { title: "The24Kings@portfolio" },
-  {
-    name: "description",
-    content: "Portfolio website by The24Kings showcasing projects and writing.",
-  },
-  { property: "og:title", content: "The24Kings@portfolio" },
-  {
-    property: "og:description",
-    content: "Portfolio website by The24Kings showcasing projects and writing.",
-  },
-  { property: "og:type", content: "website" },
-  { property: "og:site_name", content: "The24Kings@portfolio" },
-  { name: "twitter:card", content: "summary" },
-  { name: "theme-color", content: "#007acc" }, // Discord embed color
-];
+export const meta: MetaFunction = ({ matches }) => {
+  const data = matches.find((m) => m.id === RouteId.root)?.loaderData;
+  const metadata = findSectionIndex(data);
+  return genMetadata(metadata, "The24Kings@portfolio", "website");
+};
 
 export default function Home() {
   return (

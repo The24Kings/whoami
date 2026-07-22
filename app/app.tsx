@@ -2,11 +2,18 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 import { MotionConfig } from "motion/react";
 
-import { CommandLine, Navigation } from "./components";
-import { useCwdPath, useDirectoryNavigation, CommandContext } from "./lib";
+import { useDirectoryNavigation } from "./lib/useDirectoryNavigation";
+import { CommandContext } from "./lib/contexts";
+import { useCwdPath } from "./lib/useCwdPath";
+import { CommandLine } from "./components/shell/CommandLine";
+import { Navigation } from "./components/shell/Navigation";
+
+interface AppProps {
+  children: ReactNode;
+}
 
 /** Persistent navigation and main-content frame for every route. */
-export default function App({ children }: { children: ReactNode }) {
+export default function App({ children }: AppProps) {
   const directoryNavigation = useDirectoryNavigation();
   const [command, setCommand] = useState("echo welcome");
   const [hovering, setHovering] = useState(false);
