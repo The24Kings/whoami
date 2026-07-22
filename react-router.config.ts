@@ -3,6 +3,7 @@ import { Dirent, readdirSync } from "node:fs";
 import { join } from "node:path";
 
 const CONTENT_ROOT = "app/markdown";
+
 function isIndexFile(file: Dirent<string>): boolean {
   return file.isFile() && file.name === "index.md";
 }
