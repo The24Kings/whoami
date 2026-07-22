@@ -19,9 +19,6 @@ export type SectionOptions = {
 
 export const INDEX_FILE = "index.md";
 
-export const ROOT_ROUTE_PREFIX = "/";
-export const PROJECT_ROUTE_PREFIX = "/projects/";
-
 /** Determine whether a discovered file name is the index file; marking the section to render as a folder. */
 export function isIndexFile(fileName: string): boolean {
   return slug(fileName) === INDEX_FILE;
