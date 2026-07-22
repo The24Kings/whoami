@@ -42,7 +42,7 @@ export default function Projects() {
               info={post.metadata}
               onClick={() => {
                 setCommand(`cat ${post.slug}`);
-                navigate(`/projects/${post.slug}`);
+                navigate(`/${RouteId.projects}/${post.slug}`);
               }}
             />
           </motion.li>
