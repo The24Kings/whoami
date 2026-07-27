@@ -2,7 +2,7 @@
 title: Project Overview
 desc: An overview of major projects I have created and worked on.
 image: /article/me.jpg
-date: 05/24/25"
+date: "05/24/25"
 tags: [Rust, TypeScript, Minecraft, C++, TCP/IP]
 links:
 ---
