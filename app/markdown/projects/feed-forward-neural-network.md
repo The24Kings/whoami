@@ -1,9 +1,10 @@
 ---
-image: /article/machine_learning.jpg
 title: Curves from Chaos
-date: 01/23/25
-tags: [AI, C++, Machine Learning, Linear Algebra]
 desc: Creating a Particle Swarm Optimizer (PSO) Feed Forward Neural Network (FFNN) for approximating a sine wave.
+image: /article/machine_learning.jpg
+date: "01/23/25"
+tags: [AI, C++, Machine Learning, Linear Algebra]
+links:
 ---
 
 <!-- markdownlint-disable-next-line MD025 -->

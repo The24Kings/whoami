@@ -13,11 +13,17 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    /* React Router emits route types into ./.react-router/types using paths
+       relative to the app source, so both roots must resolve as one tree. */
+    "rootDirs": [".", "./.react-router/types"],
+    "paths": {
+      "~/*": ["./app/*"]
+    },
     /* Linting */
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "app", ".react-router/types/**/*"]
+  "include": ["app", ".react-router/types/**/*"]
 }

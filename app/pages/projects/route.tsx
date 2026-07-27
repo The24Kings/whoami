@@ -1,23 +1,16 @@
 import { Outlet } from "react-router";
 import type { MetaFunction } from "react-router";
 
-import type { SectionData } from "../../types";
-import { findSectionIndex, genMetadata } from "../../lib/posts";
-import { initSection, RouteId, type RouteInfo } from "../../lib/site-catalog";
+import { findSectionIndex, genMetadata } from "~/lib/metadata";
+import { SECTIONS } from "~/lib/sections";
+import { getSection } from "~/lib/site-catalog";
 
 export const meta: MetaFunction = ({ matches }) => {
-  const data = matches.find((m) => m.id === RouteId.projects)?.loaderData;
-  return genMetadata(findSectionIndex(data), "Projects", "website");
+  const data = matches.find((m) => m.id === SECTIONS.projects.id)?.loaderData;
+  return genMetadata(findSectionIndex(data), "Projects");
 };
 
-function loadRoutes(): SectionData {
-  const files = import.meta.glob<RouteInfo>("/app/markdown/projects/*.md", {
-    eager: true,
-    import: "default",
-  });
-
-  return initSection({ files });
-}
+const loadRoutes = () => getSection(SECTIONS.projects);
 
 // loader: runs at build time so prerendered pages get correct data + meta.
 // clientLoader: runs in the browser so non-prerendered slugs resolve client-side.

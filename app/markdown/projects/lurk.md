@@ -1,9 +1,10 @@
 ---
-image: /article/deku_tree.png
 title: Threading Through the Deku Tree over TCP/IP
-date: 03/29/25
-tags: [Rust, TCP/IP, Networking, Multi-thread]
 desc: The architecture behind the server/ client applications for my Multi-user Dungeon game.
+image: /article/deku_tree.png
+date: "03/29/25"
+tags: [Rust, TCP/IP, Networking, Multi-thread]
+links:
 ---
 
 <!-- markdownlint-disable-next-line MD025 -->

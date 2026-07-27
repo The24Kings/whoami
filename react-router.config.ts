@@ -2,35 +2,52 @@ import type { Config } from "@react-router/dev/config";
 import { Dirent, readdirSync } from "node:fs";
 import { join } from "node:path";
 
-const CONTENT_ROOT = "app/markdown";
+import { CONTENT_ROOT, INDEX_FILE, SECTION_LIST } from "./app/lib/sections";
+
+const SECTION_DIRS: ReadonlySet<string> = new Set(
+  SECTION_LIST.map((section) => section.dir),
+);
 
 function isIndexFile(file: Dirent<string>): boolean {
-  return file.isFile() && file.name === "index.md";
+  return file.isFile() && file.name === INDEX_FILE;
 }
 
 function isArticleFile(file: Dirent<string>): boolean {
-  return file.isFile() && file.name.endsWith(".md") && file.name !== "index.md";
+  return file.isFile() && file.name.endsWith(".md") && file.name !== INDEX_FILE;
 }
 
 function joinPath(base: string, segment: string): string {
   return base === "/" ? `/${segment}` : `${base}/${segment}`;
 }
 
+function hasIndex(directory: string): boolean {
+  return readdirSync(directory, { withFileTypes: true }).some(isIndexFile);
+}
+
+/**
+ * Walk the content tree and collect every route that should be prerendered.
+ *
+ * Top-level `.md` files are served by the dynamic `:page` route.
+ * Directories are different: they only become routes when declared in `SECTIONS`.
+ * Undeclared files are a mistake worth failing on rather than silently resolving as a 404.
+ */
 function prerenderPaths(directory = CONTENT_ROOT, routePath = "/"): string[] {
   const entries = readdirSync(directory, { withFileTypes: true });
-  const hasIndex = entries.some(isIndexFile);
 
   const files = entries.flatMap((entry) => {
     if (entry.isDirectory()) {
-      // Ignore directories that don't have an index.md file, since they won't be rendered as a route in navigational components.
       const childDirectory = join(directory, entry.name);
-      const childEntries = readdirSync(childDirectory, { withFileTypes: true });
 
-      if (!childEntries.some(isIndexFile)) return [];
+      // Directories without an index.md aren't rendered as routes.
+      if (!hasIndex(childDirectory)) return [];
 
-      // Recurse into the child directory to find all files that should be prerendered.
-      const childRoute = joinPath(routePath, entry.name);
-      return prerenderPaths(join(directory, entry.name), childRoute);
+      if (!SECTION_DIRS.has(entry.name)) {
+        throw new Error(
+          `Markdown directory "${entry.name}" has an ${INDEX_FILE} but is not declared in SECTIONS `,
+        );
+      }
+
+      return prerenderPaths(childDirectory, joinPath(routePath, entry.name));
     }
 
     if (!isArticleFile(entry)) return [];
@@ -38,10 +55,7 @@ function prerenderPaths(directory = CONTENT_ROOT, routePath = "/"): string[] {
     return [joinPath(routePath, entry.name)];
   });
 
-  return hasIndex ? [routePath, ...files] : files;
+  return entries.some(isIndexFile) ? [routePath, ...files] : files;
 }
 
-export default {
-  ssr: false,
-  prerender: prerenderPaths(),
-} satisfies Config;
+export default { ssr: false, prerender: prerenderPaths() } satisfies Config;

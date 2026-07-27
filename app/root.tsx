@@ -1,27 +1,17 @@
 import { isRouteErrorResponse, Outlet, useRouteError } from "react-router";
 
 import App from "./app";
-import type { SectionData } from "./types";
 import { Article } from "./components/Article";
-import { initSection, type RouteInfo } from "./lib/site-catalog";
+import { getSection } from "./lib/site-catalog";
 
 export { Layout } from "./document"; // Re-export for react-router
 
 import "./index.css";
+import "./lib/hljs-theme.css";
+import "katex/dist/katex.min.css";
 
-function loadRoutes(): SectionData {
-  const files = import.meta.glob<RouteInfo>("/app/markdown/*.md", {
-    eager: true,
-    import: "default",
-  });
-
-  const folders = import.meta.glob<RouteInfo>("/app/markdown/*/index.md", {
-    eager: true,
-    import: "default",
-  });
-
-  return initSection({ files, folders });
-}
+// The root route owns the top-level page catalog used by the shell navigation.
+const loadRoutes = () => getSection();
 
 // loader: runs at build time so prerendered pages get correct data + meta.
 // clientLoader: runs in the browser so non-prerendered slugs resolve client-side.

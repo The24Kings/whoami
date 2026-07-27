@@ -6,13 +6,8 @@ import MarkdownItLinkAttributes from "markdown-it-link-attributes";
 import anchor from "markdown-it-anchor";
 import { katex } from "@mdit/plugin-katex";
 import hljs from "highlight.js";
-import parse from "html-react-parser";
-import type { ReactNode } from "react";
 
 import { subtext, expandableImage, relativeLinks } from "../plugins";
-
-import "./hljs-theme.css";
-import "katex/dist/katex.min.css";
 
 const languageAliases: Record<string, string> = {
   "c#": "csharp",
@@ -25,16 +20,17 @@ function highlight(str: string, lang: string): string {
 
   if (normalizedLang && hljs.getLanguage(normalizedLang)) {
     try {
-      const escapedLang = md.utils.escapeHtml(normalizedLang);
+      const escapedLang = MarkdownIt().utils.escapeHtml(normalizedLang);
       return `<pre><code class="hljs language-${escapedLang}">${hljs.highlight(str, { language: normalizedLang }).value}</code></pre>`;
     } catch {
       // Fall back to the escaped, unhighlighted output below.
     }
   }
-  return `<pre><code class="hljs">${md.utils.escapeHtml(str)}</code></pre>`;
+  return `<pre><code class="hljs">${MarkdownIt().utils.escapeHtml(str)}</code></pre>`;
 }
 
-export const md = MarkdownIt({
+/** Build-time Markdown renderer. */
+const md = MarkdownIt({
   html: true,
   linkify: true,
   typographer: true,
@@ -58,7 +54,13 @@ export const md = MarkdownIt({
     }),
   });
 
-/** Render a markdown string into React nodes. */
-export function renderMarkdown(body: string): ReactNode {
-  return parse(md.render(body));
+/** Environment threaded through markdown-it so plugins know where a file lives. */
+export type RenderEnv = {
+  /** Directory name under the content root, or "" for a top-level page. */
+  dir: string;
+};
+
+/** Render a Markdown source string to HTML at build time. */
+export function renderToHtml(source: string, env: RenderEnv): string {
+  return md.render(source, env);
 }

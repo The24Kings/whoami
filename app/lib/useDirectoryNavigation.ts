@@ -1,20 +1,19 @@
 import { useLocation, useMatches } from "react-router";
 
-import type { ExternalLink, PostResp, SectionData } from "../types";
-import { isSectionData } from "./posts";
-import { normalizeUrlPath } from "./site-catalog";
-
-export type DirectoryNavigation = {
-  base: string;
-  pages: PostResp[];
-  links: ExternalLink[];
-};
+import { isSectionData } from "~/types";
+import type { DirectoryNavigation, SectionData } from "~/types";
+import { normalizePath } from "./site-catalog";
 
 const EMPTY_DIRECTORY: DirectoryNavigation = {
   base: "",
   pages: [],
   links: [],
 };
+
+/** Normalize a URL path by replacing backslashes with forward slashes and removing trailing slashes. */
+function normalizeUrlPath(path: string): string {
+  return normalizePath(path).replace(/\/+$/, "") || "/";
+}
 
 /** Resolve the dropdown contents for routes that represent directories. */
 export function useDirectoryNavigation(): DirectoryNavigation {

@@ -16,10 +16,18 @@
     var(--shadow);
 }
 
-.card:focus-visible {
+/* The title is the card's single focusable control, so the whole card shows the
+   focus ring on its behalf. */
+.card:has(.title-action:focus-visible) {
   outline: 2px solid var(--color-accent-blue);
   outline-offset: 2px;
   border-color: var(--color-accent-blue);
+}
+
+.card .title-action {
+  all: unset;
+  display: block;
+  cursor: pointer;
 }
 
 .card .img {
