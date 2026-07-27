@@ -8,24 +8,44 @@ A personal portfolio and technical writing site for project writeups, experiment
 
 Built with React, React Router, TypeScript, and Vite.
 
-## Adding a new section
+## Adding content
 
-Sections are driven by Markdown. Adding an article to an existing section only requires a new Markdown file; its filename becomes the article slug.
+Content is driven by Markdown under `app/markdown/`. Each file's front matter
+supplies its card and page metadata, and its filename becomes the URL slug.
 
-> The easiest way to add a new route is to follow the same convention as `projects/`
+### Adding a page
 
-To add a new section:
+Drop a `.md` file into `app/markdown/`. Nothing else is required — top-level
+pages are routed dynamically. `app/markdown/resume.md` is served at `/resume.md`,
+and `app/markdown/index.md` backs the home page.
 
-1. Add an ID to `RouteId` in `app/lib/site-catalog.ts`.
-2. Create the needed files and folders for routing:
-    - Create `app/pages/<section>/route.tsx`. Its `loader` and `clientLoader` should use `import.meta.glob` with a literal pattern such as `"/app/markdown/<section>/*.md"`, then pass the files to `initSection`.
-      > Vite expands these globs at build time, so variables and template literals cannot be used for the glob pattern.
-    - Create `app/pages/<section>/index.tsx` and `app/pages/<section>/post.tsx`. These render the section list and individual articles.
-      > You can reuse the existing `projects` views, changing the `RouteId` and route prefix as needed.
+### Adding an article to an existing section
 
-3. Register the parent route, its index route, and its `:slug` child in `app/routes.ts`.
-4. Add `app/markdown/<section>/index.md` with the section front matter. This file provides section metadata only; its Markdown body is not rendered.
+Add a `.md` file beside the section's `index.md`, e.g.
+`app/markdown/projects/example.md` is served at `/projects/example.md`.
+
+### Adding a new section
+
+Sub-level sections are declared explicitly so their routes stay intentional. The
+build fails with a clear error if a Markdown directory has an `index.md` but no
+matching declaration.
+
+1. Add an entry to `SECTIONS` in `app/lib/sections.ts`.
+2. Register the parent route, its index route, and its `:slug` child in
+   `app/routes.ts`, reading the path and id from `SECTIONS`.
+3. Create `app/pages/<section>/route.tsx` with a `loader`/`clientLoader` calling
+   `getSection(SECTIONS.<section>.dir)`, plus `index.tsx` and `post.tsx` views.
+   > The existing `projects` views can be reused as-is, swapping the section.
+4. Add `app/markdown/<section>/index.md` for the section front matter. Its
+   `links` field renders as the symlink entries in the shell navigation.
 5. Add article Markdown files beside `index.md`.
-    > Each file's front matter provides its card and page metadata; the filename is used as its URL slug.
 
-For example, `app/markdown/<section>/example.md` is available at `/<section>/example.md` after its route is registered.
+## Scripts
+
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Prerender the static site into `build/` |
+| `npm run type-check` | Type-check both TS projects (`tsc -b`) |
+| `npm run lint` | Run ESLint |
+| `npm run format` | Format with Prettier |

@@ -1,9 +1,10 @@
 ---
-image:
 title: Pathfinding, Pruning, and Playing to Win
-date: 12/02/24
-tags: [AI, Machine Learning, Algorithms, C++]
 desc: A collection of classic AI algorithms, including backtracking, decision tree learning, A* pathfinding, and Minimax Alpha Beta pruning.
+image:
+date: 12/02/24"
+tags: [AI, Machine Learning, Algorithms, C++]
+links:
 ---
 
 <!-- markdownlint-disable-next-line MD025 -->

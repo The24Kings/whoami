@@ -1,5 +1,7 @@
 import { useLocation, useNavigate } from "react-router";
-import type { CrumbProps, CrumbVariants } from "../components";
+import { useMemo } from "react";
+
+import type { CrumbProps, CrumbVariants } from "~/components/shell/BreadCrumb";
 
 interface CrumbSpec {
   name: string;
@@ -58,5 +60,9 @@ function buildCwdPath(
 export function useCwdPath(setCommand: (cmd: string) => void): CrumbProps[] {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  return buildCwdPath(pathname, navigate, setCommand);
+
+  return useMemo(
+    () => buildCwdPath(pathname, navigate, setCommand),
+    [pathname, navigate, setCommand],
+  );
 }

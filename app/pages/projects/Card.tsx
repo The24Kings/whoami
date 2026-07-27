@@ -1,15 +1,15 @@
 import React from "react";
 import { motion } from "motion/react";
 
-import type { PostMetadata } from "../../types";
-import { useTagFilter } from "../../lib/useTagFilter";
-import { useCommandContext } from "../../lib/useCommandContext";
-import { hoverScale, tapScale } from "../../lib/animations";
+import type { Metadata } from "~/types";
+import { useTagFilter } from "~/lib/useTagFilter";
+import { useCommandContext } from "~/lib/useCommandContext";
+import { hoverScale, tapScale } from "~/lib/animations";
 
 import "./Card.css";
 
 export interface CardProps {
-  info: PostMetadata;
+  info: Metadata;
   onClick?: () => void;
 }
 
@@ -18,10 +18,6 @@ function onKeyDown(e: React.KeyboardEvent, onClick?: () => void) {
     e.preventDefault();
     onClick?.();
   }
-}
-
-function stopPointerPropagation(el: HTMLButtonElement | null) {
-  el?.addEventListener("pointerdown", (e) => e.stopPropagation());
 }
 
 export const Card = ({ info, onClick }: CardProps) => {
@@ -42,13 +38,9 @@ export const Card = ({ info, onClick }: CardProps) => {
   return (
     <motion.div
       className="card"
-      role="button"
-      tabIndex={0}
-      aria-label={`View ${info.title}`}
-      onClick={onClick}
-      onKeyDown={(e) => onKeyDown(e, onClick)}
       whileHover={hoverScale}
       whileTap={tapScale}
+      onClick={onClick}
     >
       {src && (
         <div className="img">
@@ -56,7 +48,19 @@ export const Card = ({ info, onClick }: CardProps) => {
         </div>
       )}
       <div className="body">
-        <h2 className="title">{info.title}</h2>
+        {/* Only the title is focusable, so tags stay reachable without nesting
+            interactive elements inside a clickable card. */}
+        <h2 className="title">
+          <button
+            type="button"
+            className="title-action"
+            aria-label={`View ${info.title}`}
+            onClick={onClick}
+            onKeyDown={(e) => onKeyDown(e, onClick)}
+          >
+            {info.title}
+          </button>
+        </h2>
         <time className="date" dateTime={info.date}>
           {date}
         </time>
@@ -67,8 +71,9 @@ export const Card = ({ info, onClick }: CardProps) => {
           {sorted?.map((tag) => (
             <button
               key={tag}
-              ref={stopPointerPropagation}
+              type="button"
               className={active.includes(tag) ? "tag active" : "tag"}
+              onPointerDown={(e) => e.stopPropagation()}
               onClick={(e) => onTagSelect(e, tag)}
             >
               {tag}

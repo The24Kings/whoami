@@ -19,6 +19,7 @@ export default function App({ children }: AppProps) {
   const [hovering, setHovering] = useState(false);
   const [focused, setFocused] = useState(false);
   const showNav = hovering || focused;
+  const cwdPath = useCwdPath(setCommand);
 
   const setNavOpen = (open: boolean) => setCommand(open ? "ls -a" : "");
 
@@ -58,7 +59,7 @@ export default function App({ children }: AppProps) {
           onFocus={handleFocus}
           onBlur={handleBlur}
         >
-          <CommandLine path={useCwdPath(setCommand)} command={command} />
+          <CommandLine path={cwdPath} command={command} />
           <Navigation open={showNav} directory={directoryNavigation} />
         </header>
 

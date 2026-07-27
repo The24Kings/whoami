@@ -1,16 +1,15 @@
 import { motion } from "motion/react";
 import { useLocation, useNavigate } from "react-router";
 
-import { slideDown, staggerContainer, staggerItem } from "../../lib/animations";
-import type { DirectoryNavigation } from "../../lib/useDirectoryNavigation";
-import { useCommandContext } from "../../lib/useCommandContext";
+import { slideDown, staggerContainer, staggerItem } from "~/lib/animations";
+import { useCommandContext } from "~/lib/useCommandContext";
 import { BreadCrumb } from "./BreadCrumb";
-import type { ExternalLink, PostResp } from "../../types";
+import type { DirectoryNavigation, ExternalLink, Summary } from "~/types";
 
 import "./Navigation.css";
 
 interface PageEntryProps {
-  post: PostResp;
+  post: Summary;
   base: string;
 }
 

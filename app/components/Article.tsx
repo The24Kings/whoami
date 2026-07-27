@@ -6,11 +6,12 @@ import { fadeIn } from "../lib/animations";
 import "./Article.css";
 
 interface ArticleProps {
-  children: ReactNode;
+  children?: ReactNode;
+  html?: string;
 }
 
 /** Wraps page/post content in the shared article layout. */
-export const Article = ({ children }: ArticleProps) => {
+export const Article = ({ children, html }: ArticleProps) => {
   return (
     <motion.div
       className="post"
@@ -18,7 +19,11 @@ export const Article = ({ children }: ArticleProps) => {
       initial={false}
       animate="animate"
     >
-      <div id="md-content">{children}</div>
+      {html === undefined ? (
+        <div id="md-content">{children}</div>
+      ) : (
+        <div id="md-content" dangerouslySetInnerHTML={{ __html: html }} />
+      )}
     </motion.div>
   );
 };
