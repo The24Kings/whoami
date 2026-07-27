@@ -1,9 +1,10 @@
 ---
-image: /article/me.jpg
 title: Project Overview
-date: 05/24/25
-tags: [Rust, TypeScript, Minecraft, C++, TCP/IP]
 desc: An overview of major projects I have created and worked on.
+image: /article/me.jpg
+date: "05/24/25"
+tags: [Rust, TypeScript, Minecraft, C++, TCP/IP]
+links:
 ---
 
 <!-- markdownlint-disable-next-line MD025 -->
@@ -20,26 +21,26 @@ It consists of 14 types of message, some of which are primarily sent by servers 
 The server is responsible for all computation related to game rules, results of battles, or collecting gold. The client is responsible for communicating with the server and interacting with the player.
 
 ```TXT
- ______    _     _           _____ 
-|___  /   | |   | |         / ____|                         
-   / / ___| | __| | __ _   | (___   ___ _ ____   _____ _ __ 
+ ______    _     _           _____
+|___  /   | |   | |         / ____|
+   / / ___| | __| | __ _   | (___   ___ _ ____   _____ _ __
   / / / _ \ |/ _` |/ _` |   \___ \ / _ \ '__\ \ / / _ \ '__|
- / /_|  __/ | (_| | (_| |   ____) |  __/ |   \ V /  __/ |   
-/_____\___|_|\__,_|\__,_|  |_____/ \___|_|    \_/ \___|_|  
+ / /_|  __/ | (_| | (_| |   ____) |  __/ |   \ V /  __/ |
+/_____\___|_|\__,_|\__,_|  |_____/ \___|_|    \_/ \___|_|
 
 You find yourself standing in front of the gaping maw of a towering tree.
 You hear a booming voice from above telling you to enter, but beware for danger lay ahead!
 
          @@@@@@@@@@@@@@@@@@@@@@@@@@@@
-      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
-     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
-   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
-  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  
-  @@@@@@@@@@@@@@  '.@@@@@@@@@@@@@@@@@.--.@@@@@@@@@ 
-    @@@@@@@@\   @@  Â¯ @@@@@@@@@@@ 'Â¯Â¯ ___..@@@@@@  
-     @@@@@@@@|                 @    .'@@@@@@@@@@   
-        @@@@@@\                    /@@@@@@@@  
-               \                  / 
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+     @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  @@@@@@@@@@@@@@  '.@@@@@@@@@@@@@@@@@.--.@@@@@@@@@
+    @@@@@@@@\   @@  Â¯ @@@@@@@@@@@ 'Â¯Â¯ ___..@@@@@@
+     @@@@@@@@|                 @    .'@@@@@@@@@@
+        @@@@@@\                    /@@@@@@@@
+               \                  /
                |   .--'|__|'--.   |
                |  /.--'/  \'--.\  |
    __  ___     /      /____\      \     ___
@@ -47,7 +48,7 @@ You hear a booming voice from above telling you to enter, but beware for danger 
 (           )_|    |__/    \__|    |_(        )(  )_   (
              /                      \__             )_(Â¯
 _______.---./    .'                    \_.--._ ___________
-  --''Â¯        _/    __                       '--..       
+  --''Â¯        _/    __                       '--..
              ''    .'
 ```
 

@@ -1,58 +1,53 @@
-import { isRouteErrorResponse, useRouteError } from 'react-router';
-import SiteContainer from './layout';
-import type { SectionData } from './types';
-import { Article } from './components';
+import { isRouteErrorResponse, Outlet, useRouteError } from "react-router";
 
-export { Layout } from './layout'; // Re-export for react-router
+import App from "./app";
+import { Article } from "./components/Article";
+import { getSection } from "./lib/site-catalog";
 
-import './index.css';
+export { Layout } from "./document"; // Re-export for react-router
 
-function loadSite(): SectionData {
-    return {
-        pages: [
-            { slug: 'projects', metadata: { image: '', title: 'Projects', date: '', desc: '' }, body: '' },
-            { slug: 'about.md', metadata: { image: '', title: 'About', date: '', desc: 'About The24Kings and this portfolio.' }, body: '' },
-            { slug: 'contact.md', metadata: { image: '', title: 'Contact', date: '', desc: 'How to get in touch with The24Kings.' }, body: '' },
-        ],
-        links: [
-            { name: 'github', url: 'https://github.com/The24Kings' },
-        ],
-    };
-}
+import "./index.css";
+import "./lib/hljs-theme.css";
+import "katex/dist/katex.min.css";
+
+// The root route owns the top-level page catalog used by the shell navigation.
+const loadRoutes = () => getSection();
 
 // loader: runs at build time so prerendered pages get correct data + meta.
 // clientLoader: runs in the browser so non-prerendered slugs resolve client-side.
-export const loader = loadSite;
-export const clientLoader = loadSite;
+export const loader = loadRoutes;
+export const clientLoader = loadRoutes;
 
 export default function Root() {
-    return <SiteContainer />;
-}
-
-export function HydrateFallback() {
-    return <SiteContainer />;
+  return (
+    <App>
+      <Outlet />
+    </App>
+  );
 }
 
 export function ErrorBoundary() {
-    const error = useRouteError();
+  const error = useRouteError();
 
-    let heading = 'Something went wrong';
-    let message = 'An unexpected error occurred.';
+  let heading = "Something went wrong";
+  let message = "An unexpected error occurred.";
 
-    if (isRouteErrorResponse(error)) {
-        heading = `${error.status} ${error.statusText}`;
-        message = error.data || message;
-    } else if (error instanceof Error) {
-        message = error.message;
-    }
+  if (isRouteErrorResponse(error)) {
+    heading = `${error.status} ${error.statusText}`;
+    message = error.data || message;
+  } else if (error instanceof Error) {
+    message = error.message;
+  }
 
-    return (
-        <SiteContainer>
-            <Article>
-                <h1 className="error">{heading}</h1>
-                <p>{message}</p>
-                <p><a href="/">Return home</a></p>
-            </Article>
-        </SiteContainer>
-    );
+  return (
+    <App>
+      <Article>
+        <h1 className="error">{heading}</h1>
+        <p>{message}</p>
+        <p>
+          <a href="/">Return home</a>
+        </p>
+      </Article>
+    </App>
+  );
 }
