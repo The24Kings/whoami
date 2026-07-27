@@ -20,5 +20,11 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["vite.config.ts"]
+  // declarations.d.ts is shared: the build-time Markdown renderer pulls in
+  // ambient module declarations that live alongside the app sources.
+  "include": [
+    "vite.config.ts",
+    "react-router.config.ts",
+    "app/declarations.d.ts"
+  ]
 }

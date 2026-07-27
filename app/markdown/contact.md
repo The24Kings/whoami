@@ -1,10 +1,10 @@
 ---
 image:
-title: 
+title: Contact
 date: 
 tags: []
-desc: 
+desc: How to get in touch with The24Kings.
 ---
 
 <!-- markdownlint-disable-next-line MD025 -->
-# Overview
+# Contact

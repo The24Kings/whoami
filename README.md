@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# [Whoami](https://24kingsunite.net)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div style="padding: 5px 0px;">
+  <img src="public/welcome.webp" alt="Website welcome" />
+</div>
 
-Currently, two official plugins are available:
+A personal portfolio and technical writing site for project writeups, experiments, and software notes. Articles are written in Markdown and presented through a terminal- and editor-inspired interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Built with React, React Router, TypeScript, and Vite.
 
-## React Compiler
+## Adding content
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Content is driven by Markdown under `app/markdown/`. Each file's front matter
+supplies its card and page metadata, and its filename becomes the URL slug.
 
-## Expanding the ESLint configuration
+### Adding a page
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Drop a `.md` file into `app/markdown/`. Nothing else is required — top-level
+pages are routed dynamically. `app/markdown/resume.md` is served at `/resume.md`,
+and `app/markdown/index.md` backs the home page.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Adding an article to an existing section
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Add a `.md` file beside the section's `index.md`, e.g.
+`app/markdown/projects/example.md` is served at `/projects/example.md`.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Adding a new section
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Sub-level sections are declared explicitly so their routes stay intentional. The
+build fails with a clear error if a Markdown directory has an `index.md` but no
+matching declaration.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+1. Add an entry to `SECTIONS` in `app/lib/sections.ts`.
+2. Register the parent route, its index route, and its `:slug` child in
+   `app/routes.ts`, reading the path and id from `SECTIONS`.
+3. Create `app/pages/<section>/route.tsx` with a `loader`/`clientLoader` calling
+   `getSection(SECTIONS.<section>.dir)`, plus `index.tsx` and `post.tsx` views.
+   > The existing `projects` views can be reused as-is, swapping the section.
+4. Add `app/markdown/<section>/index.md` for the section front matter. Its
+   `links` field renders as the symlink entries in the shell navigation.
+5. Add article Markdown files beside `index.md`.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Scripts
+
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Start the dev server |
+| `npm run build` | Prerender the static site into `build/` |
+| `npm run type-check` | Type-check both TS projects (`tsc -b`) |
+| `npm run lint` | Run ESLint |
+| `npm run format` | Format with Prettier |
