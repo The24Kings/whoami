@@ -27,6 +27,8 @@ export type ExternalLink = {
   name: string;
   /** The URL the link points to. */
   url: string;
+  /** Optional display text shown instead of the raw URL. */
+  alias?: string;
 };
 
 /** The browsable contents of a directory.  */

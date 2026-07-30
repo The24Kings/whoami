@@ -42,6 +42,8 @@ interface LinkEntryProps {
 }
 
 const LinkEntry = ({ link }: LinkEntryProps) => {
+  const label = link.alias ?? link.url;
+
   return (
     <motion.li variants={staggerItem}>
       <a
@@ -51,7 +53,7 @@ const LinkEntry = ({ link }: LinkEntryProps) => {
         rel="noopener noreferrer"
         aria-label={`${link.name} (opens in a new tab)`}
       >
-        <em>{link.name}</em> {"->"} <em>{link.url}</em>
+        <em>{link.name}</em> {"->"} <em>{label}</em>
       </a>
     </motion.li>
   );
