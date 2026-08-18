@@ -22,6 +22,13 @@ import { useEffect, useRef } from "react";
  * ></script>
  */
 
+/**
+ * Free Open Source CDN for testing the theme in dev.
+ * The css needs to be hosted somewhere for it to load properly.
+ */
+const THEME_URL =
+  "https://cdn.jsdelivr.net/gh/The24Kings/whoami@main/public/giscus.css";
+
 export function useGiscusDiscussion() {
   const commentsRef = useRef<HTMLDivElement>(null);
 
@@ -40,12 +47,12 @@ export function useGiscusDiscussion() {
       "repo-id": "R_kgDOJ04nAg",
       category: "Articles",
       "category-id": "DIC_kwDOJ04nAs4DDrOI",
-      mapping: "og:title",
+      mapping: "url",
       strict: "1",
       "reactions-enabled": "1",
       "emit-metadata": "0",
-      "input-position": "top",
-      theme: "preferred_color_scheme",
+      "input-position": "bottom",
+      theme: THEME_URL,
       lang: "en",
       loading: "lazy",
     }).forEach(([k, v]) => script.setAttribute(`data-${k}`, v));
