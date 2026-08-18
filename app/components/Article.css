@@ -240,6 +240,12 @@ html:has(.post .expandable-img-overlay:target) {
   color: var(--alert-caution);
 }
 
+.post .comments-container {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+}
+
 @media (max-width: 768px) {
   .post {
     padding: 8px 12px;

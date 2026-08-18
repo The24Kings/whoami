@@ -1,0 +1,162 @@
+/*!
+ * giscus theme mirroring the palette in app/index.css.
+ * Loaded inside the giscus iframe, so the values must be duplicated literals.
+ */
+
+main {
+  --color-background: #ffffff;
+  --color-panel-card: #f3f3f3;
+  --color-raised-surface: #fafafa;
+  --color-border: #d4d4d4;
+  --color-primary-text: #1e1e1e;
+  --color-muted-text: #6a6a6a;
+  --color-accent-blue: #007acc;
+  --color-hover-background: #e8e8e8;
+  --color-accent-bg: rgba(0, 122, 204, 0.1);
+  --color-accent-border: rgba(0, 122, 204, 0.5);
+  --color-neutral-bg: rgba(106, 106, 106, 0.2);
+
+  --syntax-comment: #008000;
+  --syntax-keyword: #0000ff;
+  --syntax-string: #a31515;
+  --syntax-constant: #098658;
+  --syntax-entity: #795e26;
+  --syntax-type: #267f99;
+  --syntax-variable: #001080;
+  --syntax-tag: #800000;
+}
+
+@media (prefers-color-scheme: dark) {
+  main {
+    --color-background: #1e1e1e;
+    --color-panel-card: #252526;
+    --color-raised-surface: #2d2d30;
+    --color-border: #4d4d4d;
+    --color-primary-text: #d4d4d4;
+    --color-muted-text: #969696;
+    --color-accent-blue: #007acc;
+    --color-hover-background: #2a2d2e;
+    --color-accent-bg: rgba(0, 122, 204, 0.15);
+    --color-neutral-bg: rgba(150, 150, 150, 0.2);
+
+    --syntax-comment: #6a9955;
+    --syntax-keyword: #569cd6;
+    --syntax-string: #ce9178;
+    --syntax-constant: #b5cea8;
+    --syntax-entity: #dcdcaa;
+    --syntax-type: #4ec9b0;
+    --syntax-variable: #9cdcfe;
+    --syntax-tag: #569cd6;
+  }
+}
+
+main {
+  --color-canvas-default: var(--color-panel-card);
+  --color-canvas-subtle: var(--color-raised-surface);
+  --color-canvas-inset: var(--color-background);
+  --color-canvas-overlay: var(--color-panel-card);
+
+  --color-fg-default: var(--color-primary-text);
+  --color-fg-muted: var(--color-muted-text);
+  --color-fg-subtle: var(--color-muted-text);
+  --color-fg-on-emphasis: #ffffff;
+
+  --color-border-default: var(--color-border);
+  --color-border-muted: var(--color-border);
+  --color-neutral-muted: var(--color-neutral-bg);
+
+  --color-accent-fg: var(--color-accent-blue);
+  --color-accent-emphasis: var(--color-accent-blue);
+  --color-accent-muted: var(--color-accent-border);
+  --color-accent-subtle: var(--color-accent-bg);
+
+  --color-success-fg: #3fb950;
+  --color-attention-fg: #d29922;
+  --color-attention-muted: rgba(210, 153, 34, 0.4);
+  --color-attention-subtle: rgba(210, 153, 34, 0.15);
+  --color-danger-fg: #f85149;
+  --color-danger-muted: rgba(248, 81, 73, 0.4);
+  --color-danger-subtle: rgba(248, 81, 73, 0.1);
+
+  --color-btn-text: var(--color-primary-text);
+  --color-btn-bg: var(--color-raised-surface);
+  --color-btn-border: var(--color-border);
+  --color-btn-shadow: 0 0 #0000;
+  --color-btn-inset-shadow: 0 0 #0000;
+  --color-btn-hover-bg: var(--color-hover-background);
+  --color-btn-hover-border: var(--color-accent-blue);
+  --color-btn-active-bg: var(--color-hover-background);
+  --color-btn-active-border: var(--color-accent-blue);
+  --color-btn-selected-bg: var(--color-hover-background);
+
+  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: var(--color-accent-blue);
+  --color-btn-primary-border: var(--color-accent-border);
+  --color-btn-primary-shadow: 0 0 #0000;
+  --color-btn-primary-inset-shadow: 0 0 #0000;
+  --color-btn-primary-hover-bg: #0e8ae0;
+  --color-btn-primary-hover-border: var(--color-accent-border);
+  --color-btn-primary-selected-bg: var(--color-accent-blue);
+  --color-btn-primary-selected-shadow: 0 0 #0000;
+  --color-btn-primary-disabled-text: rgba(255, 255, 255, 0.5);
+  --color-btn-primary-disabled-bg: var(--color-accent-border);
+  --color-btn-primary-disabled-border: var(--color-accent-border);
+
+  --color-action-list-item-default-hover-bg: var(--color-hover-background);
+  --color-segmented-control-bg: var(--color-background);
+  --color-segmented-control-button-bg: var(--color-panel-card);
+  --color-segmented-control-button-selected-border: var(--color-accent-blue);
+  --color-social-reaction-bg-hover: var(--color-hover-background);
+  --color-social-reaction-bg-reacted-hover: var(--color-accent-bg);
+  --color-primer-shadow-inset: 0 0 #0000;
+
+  --color-prettylights-syntax-comment: var(--syntax-comment);
+  --color-prettylights-syntax-constant: var(--syntax-constant);
+  --color-prettylights-syntax-entity: var(--syntax-entity);
+  --color-prettylights-syntax-storage-modifier-import: var(
+    --color-primary-text
+  );
+  --color-prettylights-syntax-entity-tag: var(--syntax-tag);
+  --color-prettylights-syntax-keyword: var(--syntax-keyword);
+  --color-prettylights-syntax-string: var(--syntax-string);
+  --color-prettylights-syntax-variable: var(--syntax-variable);
+  --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
+  --color-prettylights-syntax-brackethighlighter-angle: var(--color-muted-text);
+  --color-prettylights-syntax-invalid-illegal-text: var(--color-primary-text);
+  --color-prettylights-syntax-invalid-illegal-bg: rgba(248, 81, 73, 0.2);
+  --color-prettylights-syntax-carriage-return-text: var(--color-primary-text);
+  --color-prettylights-syntax-carriage-return-bg: rgba(248, 81, 73, 0.2);
+  --color-prettylights-syntax-string-regex: var(--syntax-type);
+  --color-prettylights-syntax-markup-list: var(--syntax-constant);
+  --color-prettylights-syntax-markup-heading: var(--color-accent-blue);
+  --color-prettylights-syntax-markup-italic: var(--color-primary-text);
+  --color-prettylights-syntax-markup-bold: var(--color-primary-text);
+  --color-prettylights-syntax-markup-deleted-text: var(--color-primary-text);
+  --color-prettylights-syntax-markup-deleted-bg: rgba(248, 81, 73, 0.15);
+  --color-prettylights-syntax-markup-inserted-text: var(--color-primary-text);
+  --color-prettylights-syntax-markup-inserted-bg: rgba(63, 185, 80, 0.15);
+  --color-prettylights-syntax-markup-changed-text: var(--color-primary-text);
+  --color-prettylights-syntax-markup-changed-bg: rgba(210, 153, 34, 0.15);
+  --color-prettylights-syntax-markup-ignored-text: var(--color-muted-text);
+  --color-prettylights-syntax-markup-ignored-bg: var(--color-neutral-bg);
+  --color-prettylights-syntax-meta-diff-range: var(--syntax-entity);
+  --color-prettylights-syntax-sublimelinter-gutter-mark: var(
+    --color-muted-text
+  );
+  --color-prettylights-syntax-constant-other-reference-link: var(
+    --syntax-string
+  );
+
+  background-color: var(--color-canvas-default);
+  color: var(--color-fg-default);
+  font-family: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+main .gsc-homepage-bg {
+  background-color: var(--color-canvas-default);
+}
+
+main code,
+main pre {
+  font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}

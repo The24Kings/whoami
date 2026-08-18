@@ -1,9 +1,10 @@
-import type { ReactNode } from "react";
+import { type ReactNode } from "react";
 import { motion } from "motion/react";
 
 import { fadeIn } from "../lib/animations";
 
 import "./Article.css";
+import { useGiscusDiscussion } from "~/lib/useGiscusDiscussion";
 
 interface ArticleProps {
   children?: ReactNode;
@@ -12,6 +13,8 @@ interface ArticleProps {
 
 /** Wraps page/post content in the shared article layout. */
 export const Article = ({ children, html }: ArticleProps) => {
+  const commentsRef = useGiscusDiscussion();
+
   return (
     <motion.div
       className="post"
@@ -24,6 +27,10 @@ export const Article = ({ children, html }: ArticleProps) => {
       ) : (
         <div id="md-content" dangerouslySetInnerHTML={{ __html: html }} />
       )}
+
+      <div className="comments-container">
+        <div className="comments-inner" ref={commentsRef} />
+      </div>
     </motion.div>
   );
 };
