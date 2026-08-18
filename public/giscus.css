@@ -70,14 +70,16 @@ main {
   --color-accent-border: rgba(0, 122, 204, 0.5);
   --color-neutral-bg: rgba(106, 106, 106, 0.2);
 
-  --syntax-comment: #008000;
-  --syntax-keyword: #0000ff;
-  --syntax-string: #a31515;
-  --syntax-constant: #098658;
-  --syntax-entity: #795e26;
-  --syntax-type: #267f99;
-  --syntax-variable: #001080;
-  --syntax-tag: #800000;
+  /* atom-one-light, mirroring app/lib/hljs-theme.css */
+  --syntax-bg: #fafafa;
+  --syntax-text: #383a42;
+  --syntax-comment: #a0a1a7;
+  --syntax-keyword: #a626a4;
+  --syntax-string: #50a14f;
+  --syntax-constant: #986801;
+  --syntax-entity: #4078f2;
+  --syntax-variable: #986801;
+  --syntax-tag: #e45649;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -93,14 +95,16 @@ main {
     --color-accent-bg: rgba(0, 122, 204, 0.15);
     --color-neutral-bg: rgba(150, 150, 150, 0.2);
 
-    --syntax-comment: #6a9955;
-    --syntax-keyword: #569cd6;
-    --syntax-string: #ce9178;
-    --syntax-constant: #b5cea8;
-    --syntax-entity: #dcdcaa;
-    --syntax-type: #4ec9b0;
-    --syntax-variable: #9cdcfe;
-    --syntax-tag: #569cd6;
+    /* atom-one-dark */
+    --syntax-bg: #282c34;
+    --syntax-text: #abb2bf;
+    --syntax-comment: #5c6370;
+    --syntax-keyword: #c678dd;
+    --syntax-string: #98c379;
+    --syntax-constant: #d19a66;
+    --syntax-entity: #61aeee;
+    --syntax-variable: #d19a66;
+    --syntax-tag: #e06c75;
   }
 }
 
@@ -167,38 +171,34 @@ main {
   --color-prettylights-syntax-comment: var(--syntax-comment);
   --color-prettylights-syntax-constant: var(--syntax-constant);
   --color-prettylights-syntax-entity: var(--syntax-entity);
-  --color-prettylights-syntax-storage-modifier-import: var(
-    --color-primary-text
-  );
+  --color-prettylights-syntax-storage-modifier-import: var(--syntax-text);
   --color-prettylights-syntax-entity-tag: var(--syntax-tag);
   --color-prettylights-syntax-keyword: var(--syntax-keyword);
   --color-prettylights-syntax-string: var(--syntax-string);
   --color-prettylights-syntax-variable: var(--syntax-variable);
   --color-prettylights-syntax-brackethighlighter-unmatched: #f85149;
-  --color-prettylights-syntax-brackethighlighter-angle: var(--color-muted-text);
-  --color-prettylights-syntax-invalid-illegal-text: var(--color-primary-text);
+  --color-prettylights-syntax-brackethighlighter-angle: var(--syntax-comment);
+  --color-prettylights-syntax-invalid-illegal-text: var(--syntax-text);
   --color-prettylights-syntax-invalid-illegal-bg: rgba(248, 81, 73, 0.2);
-  --color-prettylights-syntax-carriage-return-text: var(--color-primary-text);
+  --color-prettylights-syntax-carriage-return-text: var(--syntax-text);
   --color-prettylights-syntax-carriage-return-bg: rgba(248, 81, 73, 0.2);
-  --color-prettylights-syntax-string-regex: var(--syntax-type);
-  --color-prettylights-syntax-markup-list: var(--syntax-constant);
-  --color-prettylights-syntax-markup-heading: var(--color-accent-blue);
-  --color-prettylights-syntax-markup-italic: var(--color-primary-text);
-  --color-prettylights-syntax-markup-bold: var(--color-primary-text);
-  --color-prettylights-syntax-markup-deleted-text: var(--color-primary-text);
+  --color-prettylights-syntax-string-regex: var(--syntax-string);
+  --color-prettylights-syntax-markup-list: var(--syntax-entity);
+  --color-prettylights-syntax-markup-heading: var(--syntax-tag);
+  --color-prettylights-syntax-markup-italic: var(--syntax-text);
+  --color-prettylights-syntax-markup-bold: var(--syntax-text);
+  --color-prettylights-syntax-markup-deleted-text: var(--syntax-tag);
   --color-prettylights-syntax-markup-deleted-bg: rgba(248, 81, 73, 0.15);
-  --color-prettylights-syntax-markup-inserted-text: var(--color-primary-text);
+  --color-prettylights-syntax-markup-inserted-text: var(--syntax-string);
   --color-prettylights-syntax-markup-inserted-bg: rgba(63, 185, 80, 0.15);
-  --color-prettylights-syntax-markup-changed-text: var(--color-primary-text);
+  --color-prettylights-syntax-markup-changed-text: var(--syntax-constant);
   --color-prettylights-syntax-markup-changed-bg: rgba(210, 153, 34, 0.15);
   --color-prettylights-syntax-markup-ignored-text: var(--color-muted-text);
   --color-prettylights-syntax-markup-ignored-bg: var(--color-neutral-bg);
   --color-prettylights-syntax-meta-diff-range: var(--syntax-entity);
-  --color-prettylights-syntax-sublimelinter-gutter-mark: var(
-    --color-muted-text
-  );
+  --color-prettylights-syntax-sublimelinter-gutter-mark: var(--syntax-comment);
   --color-prettylights-syntax-constant-other-reference-link: var(
-    --syntax-string
+    --syntax-entity
   );
 
   background-color: var(--color-canvas-default);
@@ -213,4 +213,9 @@ main .gsc-homepage-bg {
 main code,
 main pre {
   font-family: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+
+main pre {
+  background-color: var(--syntax-bg);
+  color: var(--syntax-text);
 }
