@@ -65,10 +65,24 @@ main {
   --color-primary-text: #1e1e1e;
   --color-muted-text: #6a6a6a;
   --color-accent-blue: #007acc;
+  --color-folder-blue: #0451a5;
+  --color-file-text: #001080;
+  --color-tag-text: #a31515;
   --color-hover-background: #e8e8e8;
   --color-accent-bg: rgba(0, 122, 204, 0.1);
   --color-accent-border: rgba(0, 122, 204, 0.5);
   --color-neutral-bg: rgba(106, 106, 106, 0.2);
+
+  --alert-note: #1f6feb;
+  --alert-note-bg: rgba(31, 111, 235, 0.1);
+  --alert-tip: #3fb950;
+  --alert-tip-bg: rgba(63, 185, 80, 0.1);
+  --alert-important: #8957e5;
+  --alert-important-bg: rgba(137, 87, 229, 0.1);
+  --alert-warning: #d29922;
+  --alert-warning-bg: rgba(210, 153, 34, 0.1);
+  --alert-caution: #f85149;
+  --alert-caution-bg: rgba(248, 81, 73, 0.1);
 
   /* atom-one-light, mirroring app/lib/hljs-theme.css */
   --syntax-bg: #fafafa;
@@ -91,6 +105,9 @@ main {
     --color-primary-text: #d4d4d4;
     --color-muted-text: #969696;
     --color-accent-blue: #007acc;
+    --color-folder-blue: #569cd6;
+    --color-file-text: #9cdcfe;
+    --color-tag-text: #ce9178;
     --color-hover-background: #2a2d2e;
     --color-accent-bg: rgba(0, 122, 204, 0.15);
     --color-neutral-bg: rgba(150, 150, 150, 0.2);
@@ -135,6 +152,11 @@ main {
   --color-danger-fg: #f85149;
   --color-danger-muted: rgba(248, 81, 73, 0.4);
   --color-danger-subtle: rgba(248, 81, 73, 0.1);
+  --color-done-fg: var(--alert-important);
+  --color-done-emphasis: var(--alert-important);
+  --color-success-emphasis: var(--alert-tip);
+  --color-attention-emphasis: var(--alert-warning);
+  --color-danger-emphasis: var(--alert-caution);
 
   --color-btn-text: var(--color-primary-text);
   --color-btn-bg: var(--color-raised-surface);
@@ -218,4 +240,138 @@ main pre {
 main pre {
   background-color: var(--syntax-bg);
   color: var(--syntax-text);
+}
+
+/* Comment bodies, mirroring the article styles in app/components/Article.css */
+
+main .markdown a {
+  color: var(--color-accent-blue);
+}
+
+main .markdown strong {
+  color: var(--color-file-text);
+}
+
+main .markdown em {
+  color: var(--color-tag-text);
+}
+
+main .markdown code:not(pre > code) {
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-raised-surface);
+}
+
+main .markdown table th {
+  background: var(--color-raised-surface);
+  color: var(--color-folder-blue);
+  border: 1px solid var(--color-border);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+main .markdown table td {
+  border: 1px solid var(--color-border);
+  padding: 8px 12px;
+}
+
+main .markdown table tr:nth-child(2n) td {
+  background: var(--color-raised-surface);
+}
+
+main .markdown table tr {
+  background: none;
+  border-top: none;
+}
+
+main .markdown hr {
+  height: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--color-border);
+}
+
+main .markdown blockquote,
+main .markdown .markdown-alert {
+  border-left: 3px solid;
+  padding: 8px 16px;
+  margin: 18px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+main .markdown blockquote {
+  color: var(--color-muted-text);
+  border-color: var(--color-border);
+}
+
+/* giscus ships no styling for GitHub alerts, so they are recreated here */
+main .markdown .markdown-alert {
+  color: var(--color-primary-text);
+}
+
+main .markdown .markdown-alert > :first-child {
+  margin-top: 0;
+}
+
+main .markdown .markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+
+main .markdown .markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+main .markdown .markdown-alert-title svg {
+  fill: currentColor;
+  margin-right: 0;
+}
+
+main .markdown .markdown-alert.markdown-alert-note {
+  border-color: var(--alert-note);
+  background: var(--alert-note-bg);
+}
+
+main .markdown .markdown-alert-note .markdown-alert-title {
+  color: var(--alert-note);
+}
+
+main .markdown .markdown-alert.markdown-alert-tip {
+  border-color: var(--alert-tip);
+  background: var(--alert-tip-bg);
+}
+
+main .markdown .markdown-alert-tip .markdown-alert-title {
+  color: var(--alert-tip);
+}
+
+main .markdown .markdown-alert.markdown-alert-important {
+  border-color: var(--alert-important);
+  background: var(--alert-important-bg);
+}
+
+main .markdown .markdown-alert-important .markdown-alert-title {
+  color: var(--alert-important);
+}
+
+main .markdown .markdown-alert.markdown-alert-warning {
+  border-color: var(--alert-warning);
+  background: var(--alert-warning-bg);
+}
+
+main .markdown .markdown-alert-warning .markdown-alert-title {
+  color: var(--alert-warning);
+}
+
+main .markdown .markdown-alert.markdown-alert-caution {
+  border-color: var(--alert-caution);
+  background: var(--alert-caution-bg);
+}
+
+main .markdown .markdown-alert-caution .markdown-alert-title {
+  color: var(--alert-caution);
 }
