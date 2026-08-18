@@ -11,9 +11,9 @@ import { useEffect, useRef } from "react";
  *  data-category-id="DIC_kwDOJ04nAs4DDrOI"
  *  data-mapping="url"
  *  data-strict="1"
- *  data-reactions-enabled="1"
+ *  data-reactions-enabled="0"
  *  data-emit-metadata="0"
- *  data-input-position="bottom"
+ *  data-input-position="top"
  *  data-theme="CUSTOM_THEME"
  *  data-lang="en"
  *  data-loading="lazy"
@@ -49,9 +49,9 @@ export function useGiscusDiscussion() {
       "category-id": "DIC_kwDOJ04nAs4DDrOI",
       mapping: "url",
       strict: "1",
-      "reactions-enabled": "1",
+      "reactions-enabled": "0",
       "emit-metadata": "0",
-      "input-position": "bottom",
+      "input-position": "top",
       theme: THEME_URL,
       lang: "en",
       loading: "lazy",
